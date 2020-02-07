@@ -14,6 +14,8 @@ section {
     width: 500px;
     height: 600px;
     position: relative;
+    overflow: hidden;
+    /* z-index: -1; */
 }
 
 .character {
@@ -24,6 +26,15 @@ section {
     bottom: 30px;
     right: calc((500px / 2) - 25px);
 }
+
+.collider {
+    width: 50px;
+    height: 50px;
+    background-color: cadetblue;
+    position: absolute;
+    bottom: 30px;
+    right: calc((500px / 3) - 25px);
+}
 </style>
 <body>
 <!-- HTML Starts -->
@@ -31,6 +42,7 @@ section {
 <h1>2D Game</h1>
 <section class="gameArea">
     <div class="character"></div>
+    <div class="collider"></div>
 </section>
 
 
@@ -41,10 +53,16 @@ section {
 // JavaScript Here
 
 // Pink box
-const $character = $(".character")
+const $character = $(".character");
+
+
+// Blue box
+const $collider = $(".collider");
+
 
 // Checks x and y position of character
-let position = $character.position()
+let position = $character.position();
+
 
 // Senses keystrokes and moves character accordingly
 $(document).on('keydown', function(e) {
@@ -52,37 +70,39 @@ $(document).on('keydown', function(e) {
     // If the left key is clicked
     if (e.which === 37) { 
 
-        // Return value is stored in "safe" AKA if the character is hitting the wall it's false, if the character is not hitting the wall its true
+        // The return value is stored in "safe" AKA if the character is hitting the wall it's false, if the character is not hitting the wall its true
         let safe = checkLeft();
 
-        // It is not hitting the wall
-        if(safe === true) {
+        // It is not hitting the wall AND check if the character is intersecting with the collider
+        if(safe === true && checkCollision() === false) {
 
-            // Continue to move left
+            // Continue to move left or a collider
             $character.css("left", "-=10")
 
         // If it is hitting the wall
         } else {
 
-            // Do nothing because it is hitting the wall AKA don't move anymore
+            // Initiate game over
+            alert("Game over")
         }
-        
+
     // If the right key is clicked
     } else if (e.which === 39) {
 
-        // Return value is stored in "safe" AKA if the character is hitting the wall it's false, if the character is not hitting the wall its true
+        // The return value is stored in "safe" AKA if the character is hitting the wall it's false, if the character is not hitting the wall its true
         let safe = checkRight();
 
-        // It is not hitting the wall
-        if(safe === true) {
+        // It is not hitting the wall AND check if the character is intersecting with the collider
+        if(safe === true && checkCollision() === false) {
 
-            // Continue to move left
+            // Continue to move right
             $character.css("left", "+=10")
-
-        // If it is hitting the wall
-        } else {
             
-             // Do nothing because it is hitting the wall AKA don't move anymore
+        // If it is hitting the wall or a collider
+        } else {
+
+            // Initiate game over
+            alert("Game over")
         }
     }
 })
@@ -117,26 +137,71 @@ $(document).on('keydown', function(e) {
 // }
 
 
+// Checks if it is safe to continue moving left without intersecting with a wall
 function checkLeft() {
+
+    // On every keydown that goes left, the first thing that happens is updating the characters position
     position = $character.position();
 
+    // If the updated position is less than or equal to where the left wall starts
     if (position.left <= 5) {
+
+        // State that check left is false AKA cannot move anymore
         return false;
+
+    // Otherwise, keep moving
     } else {
         return true;
     }
 }
 
-
+// Checks if it is safe to continue moving right without intersecting with a wall
 function checkRight() {
+
+        // On every keydown that goes left, the first thing that happens is updating the characters position
     position = $character.position();
 
+        // If the updated position is less than or equal to where the right wall starts
     if (position.left >= 440) {
+
+        // State that check left is false AKA cannot move anymore
         return false;
+
+    // Otherwise, keep moving
     } else {
         return true;
     }
 }
+
+
+// Collision function
+function checkCollision() {
+    var x1 = $character.offset().left;
+    var y1 = $character.offset().top;
+    var h1 = $character.outerHeight(true);
+    var w1 = $character.outerWidth(true);
+    var b1 = y1 + h1;
+    var r1 = x1 + w1;
+    var x2 = $collider.offset().left;
+    var y2 = $collider.offset().top;
+    var h2 = $collider.outerHeight(true);
+    var w2 = $collider.outerWidth(true);
+    var b2 = y2 + h2;
+    var r2 = x2 + w2;
+
+    if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) {
+        console.log("YOURE ALL CLEAR")
+
+        return false;
+    } else {
+        console.log("COLLISION DETECTED");
+
+        return true;
+    }
+}
+
+console.log(checkCollision());
+
 
     </script>
 </body>
