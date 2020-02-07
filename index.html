@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>2D Collision Game</title>
+</head>
+<style>
+/* CSS Starts */
+
+section {
+    background-color: #f2f2f2;
+    width: 500px;
+    height: 600px;
+    position: relative;
+}
+
+.character {
+    width: 50px;
+    height: 50px;
+    background-color: pink;
+    position: absolute;
+    bottom: 30px;
+    right: calc((500px / 2) - 25px);
+}
+</style>
+<body>
+<!-- HTML Starts -->
+
+<h1>2D Game</h1>
+<section class="gameArea">
+    <div class="character"></div>
+</section>
+
+
+<!-- JavaScript Starts -->
+
+    <script src='https://code.jquery.com/jquery-3.4.0.min.js' integrity='sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=' crossorigin='anonymous'></script>
+    <script>
+// JavaScript Here
+
+// Pink box
+const $character = $(".character")
+
+// Checks x and y position of character
+let position = $character.position()
+
+// Senses keystrokes and moves character accordingly
+$(document).on('keydown', function(e) {
+    
+    // If the left key is clicked
+    if (e.which === 37) { 
+
+        // Return value is stored in "safe" AKA if the character is hitting the wall it's false, if the character is not hitting the wall its true
+        let safe = checkLeft();
+
+        // It is not hitting the wall
+        if(safe === true) {
+
+            // Continue to move left
+            $character.css("left", "-=10")
+
+        // If it is hitting the wall
+        } else {
+
+            // Do nothing because it is hitting the wall AKA don't move anymore
+        }
+        
+    // If the right key is clicked
+    } else if (e.which === 39) {
+
+        // Return value is stored in "safe" AKA if the character is hitting the wall it's false, if the character is not hitting the wall its true
+        let safe = checkRight();
+
+        // It is not hitting the wall
+        if(safe === true) {
+
+            // Continue to move left
+            $character.css("left", "+=10")
+
+        // If it is hitting the wall
+        } else {
+            
+             // Do nothing because it is hitting the wall AKA don't move anymore
+        }
+    }
+})
+
+
+// // Checks position for character on page to stop when it collides with the wall
+// // Returns true - When its not hitting a wall
+// // Returns false - When character hits wall
+// function checkPosition() {
+
+//     // Updates position after every key stroke (instead of just at the top)
+//     position = $character.position()
+
+//     // Checks if hits left wall
+//     if (position.left <= 5) {
+
+//         // These returns can return any data type. They are placeholders to reference the result of this function, so I can use that somewhere else
+//         return false;
+
+//     // Checks if hits right wall
+//     } else if (position.left >= 440) {
+
+//         // These returns can return any data type. They are placeholders to reference the result of this function, so I can use that somewhere else
+//         return false;
+
+//     
+//     } else {
+
+//         // These returns can return any data type. They are placeholders to reference the result of this function, so I can use that somewhere else
+//         return true;
+//     }
+// }
+
+
+function checkLeft() {
+    position = $character.position();
+
+    if (position.left <= 5) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+
+function checkRight() {
+    position = $character.position();
+
+    if (position.left >= 440) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+    </script>
+</body>
+</html>
