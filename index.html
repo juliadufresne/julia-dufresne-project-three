@@ -10,7 +10,6 @@
 /* CSS Starts */
 :root {
     --x: 0px;
-    /* --y: 100px; */
 }
 
 section {
@@ -31,6 +30,7 @@ section {
     right: calc((500px / 2) - 25px);
     border-radius: 25px;
     transform: translateX(var(--x));
+    transition: transform .2s ease;
 }
 
 .collider {
@@ -38,10 +38,11 @@ section {
     height: 50px;
     background-color: cadetblue;
     position: absolute;
-    bottom: 30px;
+    top: -50px;
     right: calc((500px / 3) - 25px);
     border-radius: 25px;
 }
+
 </style>
 <body>
 <!-- HTML Starts -->
@@ -49,6 +50,15 @@ section {
 <h1>2D Game</h1>
 <section class="gameArea">
     <div class="character"></div>
+    <div class="collider"></div>
+    <div class="collider"></div>
+    <div class="collider"></div>
+    <div class="collider"></div>
+    <div class="collider"></div>
+    <div class="collider"></div>
+    <div class="collider"></div>
+    <div class="collider"></div>
+    <div class="collider"></div>
     <div class="collider"></div>
 </section>
 
@@ -72,22 +82,23 @@ game.collider = $(".collider");
 // Checks x and y position of character
 game.position = game.character.position();
 
+// Checks x and y position of character
+game.colliderPosition = game.collider.position();
+
 
 // Updates character to move
 game.characterX = 0;
 
 
-
-// function animate() {
-//     game.characterX = game.characterX - 4;
-//     game.character.css("--x", game.characterX + "px");
-
-//     window.requestAnimationFrame(animate)
-// }
-// window.requestAnimationFrame(animate)
+game.collider.animate({
+    top: "+=650"
+},8000, function() {
+    // Animation complete.
+}),
 
 
-// Checks if its safe to move character (that it's not intersecting  with wall or collider)
+
+// Checks if its safe to move character (that it's not intersecting with wall or collider)
 game.moveChecker = function(e) {
 
         // If the left key is clicked
@@ -100,13 +111,13 @@ game.moveChecker = function(e) {
         if(safe === true && game.checkCollision() === false) {
 
             // Continue to move right
-            game.characterX = game.characterX - 4;
+            game.characterX = game.characterX - 10;
             game.character.css("--x", game.characterX + "px");
             // animate();
 
         // If it is hitting the wall
         } else {
-
+            
             // Do nothing
         }
 
@@ -120,12 +131,12 @@ game.moveChecker = function(e) {
         if(safe === true && game.checkCollision() === false) {
 
             // Continue to move right
-            game.characterX = game.characterX - -4;
+            game.characterX = game.characterX - -10;
             game.character.css("--x", game.characterX + "px")
             
         // If it is hitting the wall or a collider
         } else {
-
+            
             // Do nothing
         }
     }
@@ -138,7 +149,7 @@ game.checkLeft = function() {
     game.position = game.character.position();
 
     // If the updated position is less than or equal to where the left wall starts
-    if (game.position.left <= 5) {
+    if (game.position.left <= 20) {
 
         // State that check left is false AKA cannot move anymore
         return false;
@@ -152,11 +163,11 @@ game.checkLeft = function() {
 // Checks if it is safe to continue moving right without intersecting with a wall
 game.checkRight = function() {
 
-        // On every keydown that goes left, the first thing that happens is updating the characters position
+    // On every keydown that goes left, the first thing that happens is updating the characters position
     game.position = game.character.position();
 
         // If the updated position is less than or equal to where the right wall starts
-    if (game.position.left >= 440) {
+    if (game.position.left >= 435) {
 
         // State that check left is false AKA cannot move anymore
         return false;
@@ -195,9 +206,30 @@ game.checkCollision = function() {
 }
 
 
+
 game.init = function() {
     // Senses keystrokes and moves character accordingly
-    $(document).on('keydown', game.moveChecker)
+    $(document).on('keydown', game.moveChecker);
+    // $(document).on('window', game.moveChecker);
+
+    let checker = setInterval(function() {
+
+        // console.log(game.colliderPosition.top)
+        game.checkCollision();
+
+        if (game.checkCollision() === true) {
+            game.collider.animate().stop();
+            stopChecker();
+        }
+    }, 200);
+
+    function stopChecker() {
+        clearInterval(checker)
+    }
+
+    setTimeout(function() {
+        stopChecker();
+    }, 8000)
 }
 
 
