@@ -28,7 +28,7 @@ section {
     position: absolute;
     bottom: 30px;
     right: calc((500px / 2) - 25px);
-    border-radius: 25px;
+    /* border-radius: 25px; */
     transform: translateX(var(--x));
     transition: transform .2s ease;
 }
@@ -39,8 +39,28 @@ section {
     background-color: cadetblue;
     position: absolute;
     top: -50px;
-    right: calc((500px / 3) - 25px);
-    border-radius: 25px;
+    right: 20px;
+    /* border-radius: 25px; */
+}
+
+.collider2 {
+    width: 50px;
+    height: 50px;
+    background-color: yellowgreen;
+    position: absolute;
+    top: 50px;
+    right: 100px;
+    /* border-radius: 25px; */
+}
+
+.collider3 {
+    width: 50px;
+    height: 50px;
+    background-color: crimson;
+    position: absolute;
+    top: 50px;
+    right: 300px;
+    /* border-radius: 25px; */
 }
 
 </style>
@@ -51,15 +71,8 @@ section {
 <section class="gameArea">
     <div class="character"></div>
     <div class="collider"></div>
-    <div class="collider"></div>
-    <div class="collider"></div>
-    <div class="collider"></div>
-    <div class="collider"></div>
-    <div class="collider"></div>
-    <div class="collider"></div>
-    <div class="collider"></div>
-    <div class="collider"></div>
-    <div class="collider"></div>
+    <div class="collider2"></div>
+    <div class="collider3"></div>
 </section>
 
 <!-- JavaScript Starts -->
@@ -78,19 +91,37 @@ game.character = $(".character");
 // Collider (blue box)
 game.collider = $(".collider");
 
+game.collider2 = $(".collider2");
+
+game.collider3 = $(".collider3");
+
 
 // Checks x and y position of character
 game.position = game.character.position();
 
-// Checks x and y position of character
+// Checks x and y position of collider
 game.colliderPosition = game.collider.position();
 
+
+game.colliderPosition2 = game.collider2.position();
 
 // Updates character to move
 game.characterX = 0;
 
 
 game.collider.animate({
+    top: "+=650"
+},8000, function() {
+    // Animation complete.
+}),
+
+game.collider2.animate({
+    top: "+=650"
+},8000, function() {
+    // Animation complete.
+}),
+
+game.collider3.animate({
     top: "+=650"
 },8000, function() {
     // Animation complete.
@@ -108,7 +139,7 @@ game.moveChecker = function(e) {
         let safe = game.checkLeft();
 
         // It is not hitting the wall AND check if the character is intersecting with the collider
-        if(safe === true && game.checkCollision() === false) {
+        if(safe === true && game.checkCollision(game.collider) === false && game.checkCollision(game.collider2) === false && game.checkCollision(game.collider3) === false) {
 
             // Continue to move right
             game.characterX = game.characterX - 10;
@@ -128,7 +159,7 @@ game.moveChecker = function(e) {
         let safe = game.checkRight();
 
         // It is not hitting the wall AND check if the character is intersecting with the collider
-        if(safe === true && game.checkCollision() === false) {
+        if(safe === true && game.checkCollision(game.collider) === false && game.checkCollision(game.collider2) === false && game.checkCollision(game.collider3) === false) {
 
             // Continue to move right
             game.characterX = game.characterX - -10;
@@ -180,17 +211,17 @@ game.checkRight = function() {
 
 
 // Collision function
-game.checkCollision = function() {
+game.checkCollision = function(enemy) {
     var x1 = game.character.offset().left;
     var y1 = game.character.offset().top;
     var h1 = game.character.outerHeight(true);
     var w1 = game.character.outerWidth(true);
     var b1 = y1 + h1;
     var r1 = x1 + w1;
-    var x2 = game.collider.offset().left;
-    var y2 = game.collider.offset().top;
-    var h2 = game.collider.outerHeight(true);
-    var w2 = game.collider.outerWidth(true);
+    var x2 = $(enemy).offset().left;
+    var y2 = $(enemy).offset().top;
+    var h2 = $(enemy).outerHeight(true);
+    var w2 = $(enemy).outerWidth(true);
     var b2 = y2 + h2;
     var r2 = x2 + w2;
 
@@ -200,7 +231,7 @@ game.checkCollision = function() {
         return false;
     } else {
         console.log("COLLISION DETECTED🤖");
-
+        
         return true;
     }
 }
@@ -214,11 +245,14 @@ game.init = function() {
 
     let checker = setInterval(function() {
 
-        // console.log(game.colliderPosition.top)
-        game.checkCollision();
+        // game.checkCollision(game.collider);
+        // game.checkCollision(game.collider2);
+        // game.checkCollision(game.collider3);
 
-        if (game.checkCollision() === true) {
+        if (game.checkCollision(game.collider) === true || game.checkCollision(game.collider2) === true || game.checkCollision(game.collider3) === true) {
             game.collider.animate().stop();
+            game.collider2.animate().stop();
+            game.collider3.animate().stop();
             stopChecker();
         }
     }, 200);
