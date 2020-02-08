@@ -77,11 +77,15 @@ game.position = game.character.position();
 game.characterX = 0;
 
 
-function animate() {
-    window.requestAnimationFrame(animate)
-}
 
-window.requestAnimationFrame(animate)
+// function animate() {
+//     game.characterX = game.characterX - 4;
+//     game.character.css("--x", game.characterX + "px");
+
+//     window.requestAnimationFrame(animate)
+// }
+// window.requestAnimationFrame(animate)
+
 
 // Checks if its safe to move character (that it's not intersecting  with wall or collider)
 game.moveChecker = function(e) {
@@ -97,7 +101,8 @@ game.moveChecker = function(e) {
 
             // Continue to move right
             game.characterX = game.characterX - 4;
-            game.character.css("--x", game.characterX + "px")
+            game.character.css("--x", game.characterX + "px");
+            // animate();
 
         // If it is hitting the wall
         } else {
