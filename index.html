@@ -10,6 +10,8 @@
 /* CSS Starts */
 :root {
     --x: 0px;
+    --randomNumber: 0px;
+
 }
 
 section {
@@ -28,7 +30,7 @@ section {
     bottom: 30px;
     right: calc((500px / 2) - 25px);
     transform: translateX(var(--x));
-    /* transition: transform .2s ease; */
+    transition: transform 0.05s linear;
 }
 
 .collider {
@@ -37,7 +39,7 @@ section {
     background-color: cadetblue;
     position: absolute;
     top: 0px;
-    right: 20px;
+    right: var(--randomNumber);
 }
 
 .collider2 {
@@ -121,20 +123,22 @@ game.checkCollision = function(enemy) {
     let enemyLeftCharacterRight = r1 < x2;
     let enemyRightCharacterLeft = x1 > r2;
 
+
+// If the character and enemy are clear of eachother, keep going, collision is false
     if (enemyAboveCharacter || characterAboveEnemy || enemyLeftCharacterRight || enemyRightCharacterLeft) {
         console.log("YOURE ALL CLEAR🍑")
-        console.log(`EnemyAboveCharacter: ${enemyAboveCharacter}`);
-        console.log(`CharacterAbobeEnemy: ${characterAboveEnemy}`);
-        console.log(`enemyLeftCharacterRight: ${enemyLeftCharacterRight}`);
-        console.log(`enemyRightCharacterLeft: ${enemyRightCharacterLeft}`);
+        // console.log(`EnemyAboveCharacter: ${enemyAboveCharacter}`);
+        // console.log(`CharacterAbobeEnemy: ${characterAboveEnemy}`);
+        // console.log(`enemyLeftCharacterRight: ${enemyLeftCharacterRight}`);
+        // console.log(`enemyRightCharacterLeft: ${enemyRightCharacterLeft}`);
         return false;
 
     } else {
         console.log("COLLISION DETECTED🤖");
-        console.log(`EnemyAboveCharacter: ${enemyAboveCharacter}`);
-        console.log(`CharacterAbobeEnemy: ${characterAboveEnemy}`);
-        console.log(`enemyLeftCharacterRight: ${enemyLeftCharacterRight}`);
-        console.log(`enemyRightCharacterLeft: ${enemyRightCharacterLeft}`);
+        // console.log(`EnemyAboveCharacter: ${enemyAboveCharacter}`);
+        // console.log(`CharacterAbobeEnemy: ${characterAboveEnemy}`);
+        // console.log(`enemyLeftCharacterRight: ${enemyLeftCharacterRight}`);
+        // console.log(`enemyRightCharacterLeft: ${enemyRightCharacterLeft}`);
         return true;
     }
 }
@@ -179,11 +183,12 @@ game.checkRight = function() {
     }
 }
 
-
+// No collision is happening on any colliders
 game.noCollision = function() {
     return game.checkCollision(game.collider) === false && game.checkCollision(game.collider2) === false && game.checkCollision(game.collider3) === false
 }
 
+// A collision is happening on any colliders
 game.anyCollision = function() {
     return game.checkCollision(game.collider) === true || game.checkCollision(game.collider2) === true || game.checkCollision(game.collider3) === true
 }
@@ -238,23 +243,26 @@ game.moveChecker = function(e) {
 game.resetCollider = function() {
     if (game.collisionStatus === false) {
         game.collider.offset({top: 0});
+        game.collider.css('left', Math.floor(Math.random() * 400))
         game.collider.animate({
             top: "+=700"
-        },8000, function() {
+        },8000, "linear", function() {
             // Animation complete.
         });
         
         game.collider2.offset({top: 0});
-        game.collider2.animate({
+        game.collider.css('left', Math.floor(Math.random() * 400))
+        game.collider2.delay(1500).animate({
             top: "+=700"
-        },8000, function() {
+        },8000, "linear", function() {
             // Animation complete.
         });
 
         game.collider3.offset({top: 0});
-        game.collider3.animate({
+        game.collider.css('left', Math.floor(Math.random() * 400))
+        game.collider3.delay(3000).animate({
             top: "+=700"
-        },8000, function() {
+        },8000, "linear", function() {
             // Animation complete.
         })
     }
@@ -262,18 +270,20 @@ game.resetCollider = function() {
 
 
 // If there is no collision (as checked with resetCollider()), run animation of the colliders again after 9 seconds
-game.resetAnimation = setInterval(game.resetCollider, 9000);
+game.resetAnimation = setInterval(game.resetCollider, 11500);
 
 
 // If there is a collision SPECIFICALLY with a collider, stop animation, game is over
 game.over = setInterval(function() {
 
-    if (game.anyCollision()) {
-        game.collisionStatus = true;
-        game.collider.animate().stop();
-        game.collider2.animate().stop();
-        game.collider3.animate().stop();
-        // alert("GAME OVER 🌿")
+    if (game.collisionStatus === false) {
+        if(game.anyCollision() === true) { 
+            game.collisionStatus = true;
+            game.collider.animate().stop();
+            game.collider2.animate().stop();
+            game.collider3.animate().stop();
+            game.stopGameOver();
+        }
     }
 }, 200);
 
@@ -302,6 +312,6 @@ $(function() {
 </body>
 </html>
 
-<!-- Refactor and cleanup (esp init) -->
+<!-- Write comment for what each conditional statement means -->
 
 <!-- randomize x axis and speeeds for colliders (maybe on resetCollider) -->
