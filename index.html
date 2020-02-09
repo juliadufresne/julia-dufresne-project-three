@@ -18,7 +18,6 @@ section {
     height: 600px;
     position: relative;
     overflow: hidden;
-    /* z-index: -1; */
 }
 
 .character {
@@ -29,7 +28,7 @@ section {
     bottom: 30px;
     right: calc((500px / 2) - 25px);
     transform: translateX(var(--x));
-    transition: transform .2s ease;
+    /* transition: transform .2s ease; */
 }
 
 .collider {
@@ -37,7 +36,7 @@ section {
     height: 50px;
     background-color: cadetblue;
     position: absolute;
-    top: -50px;
+    top: 0px;
     right: 20px;
 }
 
@@ -46,7 +45,7 @@ section {
     height: 50px;
     background-color: cadetblue;
     position: absolute;
-    top: -50px;
+    top: 0px;
     right: 100px;
 }
 
@@ -55,7 +54,7 @@ section {
     height: 50px;
     background-color: cadetblue;
     position: absolute;
-    top: -50px;
+    top: 0px;
     right: 300px;
 }
 
@@ -78,136 +77,31 @@ section {
 
 // JavaScript Here
 
+// Game object that holds all parts of the applicaiton
 const game = {};
 
 // Character
 game.character = $(".character");
 
-
 // Colliders
 game.collider = $(".collider");
-
 game.collider2 = $(".collider2");
-
 game.collider3 = $(".collider3");
 
-
 // Checks x and y position of character
-game.position = game.character.position();
+game.characterPosition = game.character.position();
 
-
-// Updates character to move
+// Updates character to move (sets it to 0 initially)
 game.characterX = 0;
 
+// Sets collision to false right from the beginning
 game.collisionStatus = false;
-
-// Animates colliders
-// game.animateCollider = game.collider.animate({
-//     top: "+=650"
-// },8000, function() {
-//     // Animation complete.
-//     resetCollider();
-// })
-
-game.animateCollider2 = game.collider2.animate({
-    top: "+=650"
-},8000, function() {
-    // Animation complete.
-})
-
-game.animateCollider3 = game.collider3.animate({
-    top: "+=650"
-},8000, function() {
-    // Animation complete.
-})
-
-resetCollider()
-
-
-// Checks if its safe to move character (that it's not intersecting with wall or collider)
-game.moveChecker = function(e) {
-
-        // If the left key is clicked
-        if (e.which === 37) { 
-
-        // The return value is stored in "safe" AKA if the character is hitting the wall it's false, if the character is not hitting the wall its true
-        let safe = game.checkLeft();
-
-        // It is not hitting the wall AND check if the character is intersecting with the collider
-        if(safe === true && game.checkCollision(game.collider) === false && game.checkCollision(game.collider2) === false && game.checkCollision(game.collider3) === false) {
-
-            // Continue to move right
-            game.characterX = game.characterX - 10;
-            game.character.css("--x", game.characterX + "px");
-            // animate();
-
-        // If it is hitting the wall
-        } else {
-            
-            // Do nothing
-        }
-
-        // If the right key is clicked
-        } else if (e.which === 39) {
-
-        // The return value is stored in "safe" AKA if the character is hitting the wall it's false, if the character is not hitting the wall its true
-        let safe = game.checkRight();
-
-        // It is not hitting the wall AND check if the character is intersecting with the collider
-        if(safe === true && game.checkCollision(game.collider) === false && game.checkCollision(game.collider2) === false && game.checkCollision(game.collider3) === false) {
-
-            // Continue to move right
-            game.characterX = game.characterX + 10;
-            game.character.css("--x", game.characterX + "px")
-            
-        // If it is hitting the wall or a collider
-        } else {
-            
-            // Do nothing
-        }
-    }
-}
-
-// Checks if it is safe to continue moving left without intersecting with a wall
-game.checkLeft = function() {
-
-    // On every keydown that goes left, the first thing that happens is updating the characters position
-    game.position = game.character.position();
-
-    // If the updated position is less than or equal to where the left wall starts
-    if (game.position.left <= 20) {
-
-        // State that check left is false AKA cannot move anymore
-        return false;
-
-    // Otherwise, keep moving
-    } else {
-
-        return true;
-    }
-}
-
-// Checks if it is safe to continue moving right without intersecting with a wall
-game.checkRight = function() {
-
-    // On every keydown that goes left, the first thing that happens is updating the characters position
-    game.position = game.character.position();
-
-        // If the updated position is less than or equal to where the right wall starts
-    if (game.position.left >= 435) {
-
-        // State that check left is false AKA cannot move anymore
-        return false;
-
-    // Otherwise, keep moving
-    } else {
-
-        return true;
-    }
-}
 
 
 // Collision function
+// Checks if any side of the character intersects with any side of the collider
+// If they don't intersect - return false (all clear, keep playing)
+// If they do intersect - return true (collision detected, game over)
 game.checkCollision = function(enemy) {
     var x1 = game.character.offset().left;
     var y1 = game.character.offset().top;
@@ -222,23 +116,143 @@ game.checkCollision = function(enemy) {
     var b2 = y2 + h2;
     var r2 = x2 + w2;
 
-    if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) {
-        console.log("YOURE ALL CLEAR🍑")
+    let characterAboveEnemy = b1 < y2;
+    let enemyAboveCharacter = y1 > b2;
+    let enemyLeftCharacterRight = r1 < x2;
+    let enemyRightCharacterLeft = x1 > r2;
 
+    if (enemyAboveCharacter || characterAboveEnemy || enemyLeftCharacterRight || enemyRightCharacterLeft) {
+        console.log("YOURE ALL CLEAR🍑")
+        console.log(`EnemyAboveCharacter: ${enemyAboveCharacter}`);
+        console.log(`CharacterAbobeEnemy: ${characterAboveEnemy}`);
+        console.log(`enemyLeftCharacterRight: ${enemyLeftCharacterRight}`);
+        console.log(`enemyRightCharacterLeft: ${enemyRightCharacterLeft}`);
         return false;
+
     } else {
         console.log("COLLISION DETECTED🤖");
-        
+        console.log(`EnemyAboveCharacter: ${enemyAboveCharacter}`);
+        console.log(`CharacterAbobeEnemy: ${characterAboveEnemy}`);
+        console.log(`enemyLeftCharacterRight: ${enemyLeftCharacterRight}`);
+        console.log(`enemyRightCharacterLeft: ${enemyRightCharacterLeft}`);
         return true;
     }
 }
 
 
-function resetCollider() {
+// Checks if it is safe to continue moving left without intersecting with a wall
+game.checkLeft = function() {
 
+    // On every keydown that goes left, the first thing that happens is updating the characters position
+    game.characterPosition = game.character.position();
+
+    // If the updated position is less than or equal to where the left wall starts
+    if (game.characterPosition.left <= 20) {
+
+        // State that check left is false AKA cannot move anymore
+        return false;
+
+    // Otherwise, keep moving
+    } else {
+
+        return true;
+    }
+}
+
+
+// Checks if it is safe to continue moving right without intersecting with a wall
+game.checkRight = function() {
+
+    // On every keydown that goes left, the first thing that happens is updating the characters position
+    game.characterPosition = game.character.position();
+
+        // If the updated position is less than or equal to where the right wall starts
+    if (game.characterPosition.left >= 435) {
+
+        // State that check left is false AKA cannot move anymore
+        return false;
+
+    // Otherwise, keep moving
+    } else {
+
+        return true;
+    }
+}
+
+
+game.noCollision = function() {
+    return game.checkCollision(game.collider) === false && game.checkCollision(game.collider2) === false && game.checkCollision(game.collider3) === false
+}
+
+game.anyCollision = function() {
+    return game.checkCollision(game.collider) === true || game.checkCollision(game.collider2) === true || game.checkCollision(game.collider3) === true
+}
+
+
+// Checks if its safe to move character (that it's not intersecting with wall or collider)
+// Calls checkLeft(), checkRight() and checkCollision()
+game.moveChecker = function(e) {
+
+        // If the left key is clicked
+        if (e.which === 37) { 
+
+        // The return value is stored in "safe" AKA if the character is hitting the wall it's false, if the character is not hitting the wall its true
+        let safe = game.checkLeft();
+
+        // It is not hitting the wall AND check if the character is intersecting with the collider
+        if(safe === true && game.noCollision()) {
+
+            // Continue to move right
+            game.characterX = game.characterX - 10;
+            game.character.css("--x", game.characterX + "px");
+
+        // If it is hitting the wall
+        } else {
+            
+            // Do nothing
+        }
+
+        // If the right key is clicked
+        } else if (e.which === 39) {
+
+        // The return value is stored in "safe" AKA if the character is hitting the wall it's false, if the character is not hitting the wall its true
+        let safe = game.checkRight();
+
+        // It is not hitting the wall AND check if the character is intersecting with the collider
+        if(safe === true && game.noCollision()) {
+
+            // Continue to move right
+            game.characterX = game.characterX + 10;
+            game.character.css("--x", game.characterX + "px")
+            
+        // If it is hitting the wall or a collider
+        } else {
+            
+            // Do nothing
+        }
+    }
+}
+
+
+// Checks if there is no collision SPECIFICALLY with a collider, continue animating the colliders
+game.resetCollider = function() {
     if (game.collisionStatus === false) {
-        game.collider.offset({top: 0, right: 20});
+        game.collider.offset({top: 0});
         game.collider.animate({
+            top: "+=700"
+        },8000, function() {
+            // Animation complete.
+        });
+        
+        game.collider2.offset({top: 0});
+        game.collider2.animate({
+            top: "+=700"
+        },8000, function() {
+            // Animation complete.
+        });
+
+        game.collider3.offset({top: 0});
+        game.collider3.animate({
             top: "+=700"
         },8000, function() {
             // Animation complete.
@@ -247,36 +261,35 @@ function resetCollider() {
 }
 
 
+// If there is no collision (as checked with resetCollider()), run animation of the colliders again after 9 seconds
+game.resetAnimation = setInterval(game.resetCollider, 9000);
+
+
+// If there is a collision SPECIFICALLY with a collider, stop animation, game is over
+game.over = setInterval(function() {
+
+    if (game.anyCollision()) {
+        game.collisionStatus = true;
+        game.collider.animate().stop();
+        game.collider2.animate().stop();
+        game.collider3.animate().stop();
+        // alert("GAME OVER 🌿")
+    }
+}, 200);
+
+
+// If game is over, clear interval
+game.stopGameOver = function() {
+    clearInterval(game.over)
+}
+
 
 game.init = function() {
-    
+    // Animates colliders right off the bat
+    game.resetCollider();
+
     // Senses keystrokes and moves character accordingly
     $(document).on('keydown', game.moveChecker);
-    // $(document).on('window', game.moveChecker);
-
-    let checker = setInterval(function() {
-
-        // game.checkCollision(game.collider);
-        // game.checkCollision(game.collider2);
-        // game.checkCollision(game.collider3);
-
-        if (game.checkCollision(game.collider) === true || game.checkCollision(game.collider2) === true || game.checkCollision(game.collider3) === true) {
-            game.collisionStatus = true;
-            game.collider.animate().stop();
-            game.collider2.animate().stop();
-            game.collider3.animate().stop();
-        }
-    }, 200);
-
-    setInterval(resetCollider, 9000);
-
-    function stopChecker() {
-        clearInterval(checker)
-    }
-
-    // setTimeout(function() {
-    //     // stopChecker();
-    // }, 8000)
 }
 
 
@@ -289,9 +302,6 @@ $(function() {
 </body>
 </html>
 
-
-<!-- apply constant animation to collider 2 and 3 -->
-
 <!-- Refactor and cleanup (esp init) -->
 
-<!-- randomize x axis for colliders (maybe on resetCollider) -->
+<!-- randomize x axis and speeeds for colliders (maybe on resetCollider) -->
