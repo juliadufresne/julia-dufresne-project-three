@@ -28,7 +28,6 @@ section {
     position: absolute;
     bottom: 30px;
     right: calc((500px / 2) - 25px);
-    /* border-radius: 25px; */
     transform: translateX(var(--x));
     transition: transform .2s ease;
 }
@@ -40,27 +39,24 @@ section {
     position: absolute;
     top: -50px;
     right: 20px;
-    /* border-radius: 25px; */
 }
 
 .collider2 {
     width: 50px;
     height: 50px;
-    background-color: yellowgreen;
+    background-color: cadetblue;
     position: absolute;
-    top: 50px;
+    top: -50px;
     right: 100px;
-    /* border-radius: 25px; */
 }
 
 .collider3 {
     width: 50px;
     height: 50px;
-    background-color: crimson;
+    background-color: cadetblue;
     position: absolute;
-    top: 50px;
+    top: -50px;
     right: 300px;
-    /* border-radius: 25px; */
 }
 
 </style>
@@ -84,11 +80,11 @@ section {
 
 const game = {};
 
-// Character (pink box)
+// Character
 game.character = $(".character");
 
 
-// Collider (blue box)
+// Colliders
 game.collider = $(".collider");
 
 game.collider2 = $(".collider2");
@@ -99,34 +95,33 @@ game.collider3 = $(".collider3");
 // Checks x and y position of character
 game.position = game.character.position();
 
-// Checks x and y position of collider
-game.colliderPosition = game.collider.position();
-
-
-game.colliderPosition2 = game.collider2.position();
 
 // Updates character to move
 game.characterX = 0;
 
+game.collisionStatus = false;
 
-game.collider.animate({
+// Animates colliders
+// game.animateCollider = game.collider.animate({
+//     top: "+=650"
+// },8000, function() {
+//     // Animation complete.
+//     resetCollider();
+// })
+
+game.animateCollider2 = game.collider2.animate({
     top: "+=650"
 },8000, function() {
     // Animation complete.
-}),
+})
 
-game.collider2.animate({
+game.animateCollider3 = game.collider3.animate({
     top: "+=650"
 },8000, function() {
     // Animation complete.
-}),
+})
 
-game.collider3.animate({
-    top: "+=650"
-},8000, function() {
-    // Animation complete.
-}),
-
+resetCollider()
 
 
 // Checks if its safe to move character (that it's not intersecting with wall or collider)
@@ -162,7 +157,7 @@ game.moveChecker = function(e) {
         if(safe === true && game.checkCollision(game.collider) === false && game.checkCollision(game.collider2) === false && game.checkCollision(game.collider3) === false) {
 
             // Continue to move right
-            game.characterX = game.characterX - -10;
+            game.characterX = game.characterX + 10;
             game.character.css("--x", game.characterX + "px")
             
         // If it is hitting the wall or a collider
@@ -187,6 +182,7 @@ game.checkLeft = function() {
 
     // Otherwise, keep moving
     } else {
+
         return true;
     }
 }
@@ -205,6 +201,7 @@ game.checkRight = function() {
 
     // Otherwise, keep moving
     } else {
+
         return true;
     }
 }
@@ -237,8 +234,22 @@ game.checkCollision = function(enemy) {
 }
 
 
+function resetCollider() {
+
+    if (game.collisionStatus === false) {
+        game.collider.offset({top: 0, right: 20});
+        game.collider.animate({
+            top: "+=700"
+        },8000, function() {
+            // Animation complete.
+        })
+    }
+}
+
+
 
 game.init = function() {
+    
     // Senses keystrokes and moves character accordingly
     $(document).on('keydown', game.moveChecker);
     // $(document).on('window', game.moveChecker);
@@ -250,20 +261,22 @@ game.init = function() {
         // game.checkCollision(game.collider3);
 
         if (game.checkCollision(game.collider) === true || game.checkCollision(game.collider2) === true || game.checkCollision(game.collider3) === true) {
+            game.collisionStatus = true;
             game.collider.animate().stop();
             game.collider2.animate().stop();
             game.collider3.animate().stop();
-            stopChecker();
         }
     }, 200);
+
+    setInterval(resetCollider, 9000);
 
     function stopChecker() {
         clearInterval(checker)
     }
 
-    setTimeout(function() {
-        stopChecker();
-    }, 8000)
+    // setTimeout(function() {
+    //     // stopChecker();
+    // }, 8000)
 }
 
 
@@ -275,3 +288,10 @@ $(function() {
 </script>
 </body>
 </html>
+
+
+<!-- apply constant animation to collider 2 and 3 -->
+
+<!-- Refactor and cleanup (esp init) -->
+
+<!-- randomize x axis for colliders (maybe on resetCollider) -->
