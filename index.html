@@ -505,8 +505,9 @@ game.init = function() {
 
     // Senses keystrokes and moves character accordingly
     $(document).on('keydown', game.moveChecker);
+    $(document).on('touch', game.moveChecker);
     
-}   $(document).on('touch', game.moveChecker);
+}   
 
 
 $(function() {
