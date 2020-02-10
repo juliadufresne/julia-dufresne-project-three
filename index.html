@@ -504,8 +504,9 @@ game.init = function() {
     // swal("Hello world!");
 
     // Senses keystrokes and moves character accordingly
-    $(document).on('keydown touchstart', game.moveChecker);
-}
+    $(document).on('keydown', game.moveChecker);
+    
+}   $(document).on('touchstart', game.moveChecker);
 
 
 $(function() {
