@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>2D Collision Game</title>
+    <link href="https://fonts.googleapis.com/css?family=Chewy&display=swap" rel="stylesheet">
+
+    <title>Up up and away ☁️</title>
 </head>
 <style>
 /* CSS Starts */
@@ -14,62 +16,153 @@
 
 }
 
+/* 
+#ca728b
+#f7cdd6
+#f4f4f4
+#b7d1e2
+#2b7c93 
+*/
+
+img {
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    font-family: 'Chewy', cursive;
+    text-align: center;
+    color: #ca728b
+}
+
 section {
+    width: 100%;
+}
+
+.gameArea {
     background-color: #f2f2f2;
     width: 500px;
     height: 600px;
     position: relative;
     overflow: hidden;
+    margin: 0 auto;
+    border-radius: 15px;
 }
 
 .character {
-    width: 50px;
-    height: 50px;
-    background-color: pink;
+    width: 100px;
+    height: 100px;
+    /* background-color: pink; */
     position: absolute;
     bottom: 30px;
     right: calc((500px / 2) - 25px);
     transform: translateX(var(--x));
     transition: transform 0.05s linear;
+    z-index: 1;
+    padding-right: 5px;
 }
 
 .collider {
-    width: 50px;
-    height: 50px;
-    background-color: cadetblue;
+    width: 75px;
+    height: 75px;
+    /* background-color: cadetblue; */
     position: absolute;
     top: 0px;
     right: var(--randomNumber);
 }
 
 .collider2 {
-    width: 50px;
-    height: 50px;
-    background-color: cadetblue;
+    width: 75px;
+    height: 75px;
+    /* background-color: cadetblue; */
     position: absolute;
     top: 0px;
     right: 100px;
 }
 
 .collider3 {
-    width: 50px;
-    height: 50px;
-    background-color: cadetblue;
+    width: 75px;
+    height: 75px;
+    /* background-color: cadetblue; */
     position: absolute;
     top: 0px;
+    right: 200px;
+}
+
+.collider4 {
+    width: 75px;
+    height: 75px;
+    /* background-color: cadetblue; */
+    position: absolute;
+    top: -75px;
     right: 300px;
 }
 
+
+.collider5 {
+    width: 75px;
+    height: 75px;
+    /* background-color: cadetblue; */
+    position: absolute;
+    top: -75px;
+    right: 400px;
+}
+
+
+.collider6 {
+    width: 75px;
+    height: 75px;
+    /* background-color: cadetblue; */
+    position: absolute;
+    top: -75px;
+    right: 60px;
+}
+
+.collider7 {
+    width: 75px;
+    height: 75px;
+    /* background-color: cadetblue; */
+    position: absolute;
+    top: -75px;
+    right: 100px;
+}
+
+.collider8 {
+    width: 75px;
+    height: 75px;
+    /* background-color: cadetblue; */
+    position: absolute;
+    top: -75px;
+    right: 100px;
+}
+
+#plane {
+    width: 95px;
+    height: 95px;
+}
+
+#bird {
+    width: 50px;
+    height: 50px;
+}
 </style>
 <body>
 <!-- HTML Starts -->
 
-<h1>2D Game</h1>
-<section class="gameArea">
-    <div class="character"></div>
-    <div class="collider"></div>
-    <div class="collider2"></div>
-    <div class="collider3"></div>
+<h1>Up up and away</h1>
+<section>
+    <div class="gameArea">
+        <!-- <div class="character"></div> -->
+        <img src="./hot-air-balloon.svg" alt="" class="character">
+        <img src="./cloudy.svg" alt="" class="collider">
+        <img src="./clouds.svg" alt="" class="collider2">
+        <img src="./cloudy.svg" alt="" class="collider3">
+        <img src="./airplane(1).svg" alt="" class="collider4" id="plane">
+        <img src="./cloudy.svg" alt="" class="collider5">
+        <img src="./cloudy.svg" alt="" class="collider6">
+        <img src="./clouds.svg" alt="" class="collider7">
+        <img src="./cloudy.svg" alt="" class="collider8">
+    </div>
 </section>
 
 <!-- JavaScript Starts -->
@@ -89,6 +182,11 @@ game.character = $(".character");
 game.collider = $(".collider");
 game.collider2 = $(".collider2");
 game.collider3 = $(".collider3");
+game.collider4 = $(".collider4");
+game.collider5 = $(".collider5");
+game.collider6 = $(".collider6");
+game.collider7 = $(".collider7");
+game.collider8 = $(".collider8");
 
 // Checks x and y position of character
 game.characterPosition = game.character.position();
@@ -151,7 +249,7 @@ game.checkLeft = function() {
     game.characterPosition = game.character.position();
 
     // If the updated position is less than or equal to where the left wall starts
-    if (game.characterPosition.left <= 20) {
+    if (game.characterPosition.left <= 0) {
 
         // State that check left is false AKA cannot move anymore
         return false;
@@ -170,8 +268,8 @@ game.checkRight = function() {
     // On every keydown that goes left, the first thing that happens is updating the characters position
     game.characterPosition = game.character.position();
 
-        // If the updated position is less than or equal to where the right wall starts
-    if (game.characterPosition.left >= 435) {
+    // If the updated position is less than or equal to where the right wall starts
+    if (game.characterPosition.left >= 400) {
 
         // State that check left is false AKA cannot move anymore
         return false;
@@ -185,12 +283,12 @@ game.checkRight = function() {
 
 // No collision is happening on any colliders
 game.noCollision = function() {
-    return game.checkCollision(game.collider) === false && game.checkCollision(game.collider2) === false && game.checkCollision(game.collider3) === false
+    return game.checkCollision(game.collider) === false && game.checkCollision(game.collider2) === false && game.checkCollision(game.collider3) === false && game.checkCollision(game.collider4) === false && game.checkCollision(game.collider5) === false && game.checkCollision(game.collider6) === false && game.checkCollision(game.collider7) === false && game.checkCollision(game.collider8) === false
 }
 
 // A collision is happening on any colliders
 game.anyCollision = function() {
-    return game.checkCollision(game.collider) === true || game.checkCollision(game.collider2) === true || game.checkCollision(game.collider3) === true
+    return game.checkCollision(game.collider) === true || game.checkCollision(game.collider2) === true || game.checkCollision(game.collider3) === true || game.checkCollision(game.collider4) === true || game.checkCollision(game.collider5) === true || game.checkCollision(game.collider6) === true || game.checkCollision(game.collider7) === true || game.checkCollision(game.collider8) === true
 }
 
 
@@ -208,7 +306,7 @@ game.moveChecker = function(e) {
         if(safe === true && game.noCollision()) {
 
             // Continue to move right
-            game.characterX = game.characterX - 10;
+            game.characterX = game.characterX - 20;
             game.character.css("--x", game.characterX + "px");
 
         // If it is hitting the wall
@@ -227,7 +325,7 @@ game.moveChecker = function(e) {
         if(safe === true && game.noCollision()) {
 
             // Continue to move right
-            game.characterX = game.characterX + 10;
+            game.characterX = game.characterX + 20;
             game.character.css("--x", game.characterX + "px")
             
         // If it is hitting the wall or a collider
@@ -245,32 +343,85 @@ game.resetCollider = function() {
         game.collider.offset({top: 0});
         game.collider.css('left', Math.floor(Math.random() * 400))
         game.collider.animate({
-            top: "+=700"
+            top: "+=1200"
         },8000, "linear", function() {
             // Animation complete.
+            collider5();
         });
         
         game.collider2.offset({top: 0});
-        game.collider.css('left', Math.floor(Math.random() * 400))
-        game.collider2.delay(1500).animate({
-            top: "+=700"
+        game.collider2.css('left', Math.floor(Math.random() * 400))
+        game.collider2.delay(2000).animate({
+            top: "+=1200"
         },8000, "linear", function() {
             // Animation complete.
+            collider6();
         });
 
         game.collider3.offset({top: 0});
-        game.collider.css('left', Math.floor(Math.random() * 400))
-        game.collider3.delay(3000).animate({
-            top: "+=700"
+        game.collider3.css('left', Math.floor(Math.random() * 400))
+        game.collider3.delay(4000).animate({
+            top: "+=1200"
+        },8000, "linear", function() {
+            // Animation complete.
+            collider7();
+        });
+
+        game.collider4.offset({top: 0});
+        game.collider4.css('left', Math.floor(Math.random() * 400))
+        game.collider4.delay(6000).animate({
+            top: "+=1200"
+        },8000, "linear", function() {
+            // Animation complete.
+            collider8();
+        });
+    }
+}
+
+    function collider5() {
+        game.collider5.offset({top: 0});
+        game.collider5.css('left', Math.floor(Math.random() * 400))
+        game.collider5.animate({
+            top: "+=1200"
+        },8000, "linear", function() {
+            // Animation complete.
+        });
+    }
+        
+    function collider6() {
+        game.collider6.offset({top: 0});
+        game.collider6.css('left', Math.floor(Math.random() * 400))
+        game.collider6.animate({
+            top: "+=1200"
+        },8000, "linear", function() {
+            // Animation complete.
+        });
+    }
+
+
+    function collider7() {
+        game.collider7.offset({top: 0});
+        game.collider7.css('left', Math.floor(Math.random() * 400))
+        game.collider7.animate({
+            top: "+=1200"
         },8000, "linear", function() {
             // Animation complete.
         })
     }
-}
+
+    function collider8() {
+        game.collider8.offset({top: 0});
+        game.collider8.css('left', Math.floor(Math.random() * 400))
+        game.collider8.animate({
+            top: "+=1200"
+        },8000, "linear", function() {
+            // Animation complete.
+        })
+    }
 
 
 // If there is no collision (as checked with resetCollider()), run animation of the colliders again after 9 seconds
-game.resetAnimation = setInterval(game.resetCollider, 11500);
+game.resetAnimation = setInterval(game.resetCollider, 15000);
 
 
 // If there is a collision SPECIFICALLY with a collider, stop animation, game is over
@@ -282,6 +433,11 @@ game.over = setInterval(function() {
             game.collider.animate().stop();
             game.collider2.animate().stop();
             game.collider3.animate().stop();
+            game.collider4.animate().stop();
+            game.collider5.animate().stop();
+            game.collider6.animate().stop();
+            game.collider7.animate().stop();
+            game.collider8.animate().stop();
             game.stopGameOver();
         }
     }
