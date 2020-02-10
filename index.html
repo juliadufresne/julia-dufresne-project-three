@@ -33,11 +33,17 @@ img {
 h1 {
     font-family: 'Chewy', cursive;
     text-align: center;
-    color: #ca728b
+    color: #ca728b;
+    font-size: 72px;
+    padding: 0;
+    margin: 0;
+    padding-bottom: 20px;
 }
 
 section {
     width: 100%;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .gameArea {
@@ -46,12 +52,20 @@ section {
     -webkit-animation: background 30s ease infinite;
     -moz-animation: background 30s ease infinite;
     animation: background 30s ease infinite;
-    width: 500px;
+    min-width: 500px;
     height: 600px;
     position: relative;
     overflow: hidden;
-    margin: 0 auto;
+    /* margin: 0 auto; */
     border-radius: 15px;
+}
+
+.instructions {
+    width: 500px;
+    height: 400px;
+    border: 2px solid #ca728b;
+    border-radius: 15px;
+    margin-right: 10px;
 }
 
 @-webkit-keyframes background {
@@ -87,7 +101,6 @@ section {
     transform: translateX(var(--x));
     transition: transform 0.05s linear;
     z-index: 1;
-    padding-right: 5px;
 }
 
 .collider {
@@ -179,6 +192,11 @@ section {
 
 <h1>Up up and away</h1>
 <section>
+    <div class="instructions">
+        <button>Start</button>
+    </div>
+
+
     <div class="gameArea" id="gameAreaBackground">
         <div class="character">
             <img src="./hot-air-balloon.svg" alt="" id="characterImg">
@@ -279,7 +297,7 @@ game.checkLeft = function() {
     game.characterPosition = game.character.position();
 
     // If the updated position is less than or equal to where the left wall starts
-    if (game.characterPosition.left <= 0) {
+    if (game.characterPosition.left <= 20) {
 
         // State that check left is false AKA cannot move anymore
         return false;
@@ -299,7 +317,7 @@ game.checkRight = function() {
     game.characterPosition = game.character.position();
 
     // If the updated position is less than or equal to where the right wall starts
-    if (game.characterPosition.left >= 400) {
+    if (game.characterPosition.left >= 420) {
 
         // State that check left is false AKA cannot move anymore
         return false;
@@ -486,7 +504,7 @@ game.init = function() {
     // swal("Hello world!");
 
     // Senses keystrokes and moves character accordingly
-    $(document).on('keydown', game.moveChecker);
+    $(document).on('keydown touchstart', game.moveChecker);
 }
 
 
