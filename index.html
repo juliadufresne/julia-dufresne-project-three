@@ -237,29 +237,29 @@ section {
 
 // JavaScript Here
 
+// TO DO
+// CREATE TOUCH SENSITIVITY TO WORK ON MOBILE
+// $('.gameArea').on('touchstart', game.touchMoveChecker);
+
+// game.touchMoveChecker = function(e) {
+//     let gameWidth = $(".gameArea").width() / 2;
+//     console.log(gameWidth)
+//     let touch = e.touches[0].clientX;
+
+//         if (touch > gameWidth / 2 && game.checkLeft() === true) {
+//             // works
+//             console.log("left")
+//         } else if (game.checkRight() === true) {
+//             // doesnt work
+//             console.log("right")
+//         }
+// };
+
 // Game object that holds all parts of the applicaiton
 const game = {};
 
-
-
-
-
-// TO DO
-
 // Pulls start button into JS
 game.start = $('.start') 
-
-
-
-
-// CREATE TOUCH SENSITIVITY TO WORK ON MOBILE
-$('.gameArea').on('touchstart', game.touchMoveChecker);
-
-
-
-
-
-
 
 // Character
 game.character = $(".character");
@@ -420,21 +420,6 @@ game.moveChecker = function(e) {
         }
     }
 }
-
-
-game.touchMoveChecker = function(e) {
-    let gameWidth = $(".gameArea").width() / 2;
-    console.log(gameWidth)
-    let touch = e.touches[0].clientX;
-
-        if (touch > gameWidth / 2 && game.checkLeft() === true) {
-            // works
-            console.log("left")
-        } else if (game.checkRight() === true) {
-            // doesnt work
-            console.log("right")
-        }
-};
 
 
 
