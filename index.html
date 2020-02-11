@@ -264,23 +264,7 @@ section {
 
 // JavaScript Here
 
-// TO DO
-// CREATE TOUCH SENSITIVITY TO WORK ON MOBILE
-// $('.gameArea').on('touchstart', game.touchMoveChecker);
 
-// game.touchMoveChecker = function(e) {
-//     let gameWidth = $(".gameArea").width() / 2;
-//     console.log(gameWidth)
-//     let touch = e.touches[0].clientX;
-
-//         if (touch > gameWidth / 2 && game.checkLeft() === true) {
-//             // works
-//             console.log("left")
-//         } else if (game.checkRight() === true) {
-//             // doesnt work
-//             console.log("right")
-//         }
-// };
 
 // Game object that holds all parts of the applicaiton
 const game = {};
@@ -449,6 +433,34 @@ game.moveChecker = function(e) {
 }
 
 
+// What side is touching
+// Move in that direction
+game.touchMoveChecker = function(e) {
+    const touchX = e.originalEvent.touches[0].pageX;
+    const gameWidth = touchX - this.offsetLeft;
+
+    if (gameWidth < 250){
+        let safe = game.checkLeft();
+
+        if (safe === true && game.noCollision()) {
+            game.characterX = game.characterX - 20;
+            game.character.css("--x", game.characterX + "px");
+        } else {
+
+        }
+    }
+
+    if (gameWidth > 250){
+        let safe = game.checkRight();
+
+        if (safe === true && game.noCollision()){
+            game.characterX = game.characterX + 20;
+            game.character.css("--x", game.characterX + "px");
+        }
+    }
+};
+
+
 
 // Checks if there is no collision SPECIFICALLY with a collider, continue animating the colliders
 game.resetCollider = function() {
@@ -559,14 +571,15 @@ game.stopGameOver = function() {
 }
 
 
+
 game.init = function() {
     // Animates colliders right off the bat
     game.resetCollider()
     
     // Senses keystrokes and moves character accordingly
     $(document).on('keydown', game.moveChecker);
-}   
-
+    $(".gameArea").on('touchstart', game.touchMoveChecker);
+}
 
 // STARTS GAME INIT
 // $(function() {
@@ -577,10 +590,13 @@ game.startGame = function() {
         game.resetAnimation = setInterval(game.resetCollider, 16000);
     })
 }
-// });
 
 // Start game
-game.startGame();
+$(function() {
+    game.startGame();
+});
+
+
 
 </script>
 </body>
