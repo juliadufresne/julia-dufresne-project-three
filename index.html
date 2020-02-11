@@ -25,7 +25,6 @@
 */
 
 
-
 img {
     padding: 0;
     margin: 0;
@@ -35,7 +34,7 @@ h1 {
     font-family: 'Chewy', cursive;
     text-align: center;
     color: #ca728b;
-    font-size: 72px;
+    font-size: 64px;
     padding: 0;
     margin: 0;
     padding-bottom: 20px;
@@ -59,31 +58,48 @@ section {
     overflow: hidden;
     /* margin: 0 auto; */
     border-radius: 15px;
+    box-shadow: -10px 10px 24px 0px rgba(202,114,139,0.6);
 }
 
 .instructions {
-    width: 500px;
+    width: calc(500px - 40px);
     height: 400px;
-    border: 2px solid #ca728b;
+    /* border: 2px solid #ca728b; */
+    box-shadow: 10px 10px 24px 0px rgba(202,114,139,0.6);
     border-radius: 15px;
     margin-right: 10px;
     text-align: center;
     font-family: 'Nunito', sans-serif;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: flex-end;
+    font-size: 18px;
+    padding: 20px;
+    background-color: white;    
+}
+
+.instructions span {
+    color: #2b7c93;
+    font-weight: bold;
 }
 
 .start {
     margin: 0 auto;
     background-color: #b7d1e2;
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Chewy', cursive;
+    text-transform: lowercase;
     border: none;
     padding: 10px 30px;
     border-radius: 10px;
-    font-size: 16px;
+    font-size: 20px;
     margin-bottom: 20px;
     cursor: pointer;
+    box-shadow: 5px 5px 12px 0px rgba(202,114,139,0.6);
+}
+
+.start:active {
+    box-shadow: 2px 2px 8px 0px rgba(202,114,139,0.6);
 }
 
 
@@ -203,13 +219,24 @@ section {
     height: 95px;
 }
 
+
+
+
 </style>
 <body>
 <!-- HTML Starts -->
 
+
+
 <h1>Up up and away</h1>
 <section>
     <div class="instructions">
+        <div>
+            <h3>It's time to go up up and away!</h3>
+            <p>You've boarded a hot air balloon to take you on the trip of a lifetime. Know where you want to go yet? Great!</p>
+            <p>In order to get there safe and sound, you've got to stay clear of a few obstacles that may get in your way, such as <span>clouds</span> and <span>planes</span>.</p>
+            <p>When you'ready to take off, click <span>start</span>. <br> You're in for a long journey - buckle up!</p>
+        </div>
         <button class="start">Start</button>
     </div>
 
@@ -506,10 +533,6 @@ game.resetCollider = function() {
     }
 
 
-// If there is no collision (as checked with resetCollider()), run animation of the colliders again
-game.resetAnimation = setInterval(game.resetCollider, 16000);
-
-
 // If there is a collision SPECIFICALLY with a collider, stop animation, game is over
 game.over = setInterval(function() {
 
@@ -550,6 +573,8 @@ game.init = function() {
 game.startGame = function() {
     $(game.start).on('click', function() {
         game.init();
+        // If there is no collision (as checked with resetCollider()), run animation of the colliders again
+        game.resetAnimation = setInterval(game.resetCollider, 16000);
     })
 }
 // });
