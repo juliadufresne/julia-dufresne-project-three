@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Chewy&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet"> 
     <title>Up up and away ☁️</title>
 </head>
 <style>
@@ -66,7 +67,25 @@ section {
     border: 2px solid #ca728b;
     border-radius: 15px;
     margin-right: 10px;
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
 }
+
+.start {
+    margin: 0 auto;
+    background-color: #b7d1e2;
+    font-family: 'Nunito', sans-serif;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
 
 @-webkit-keyframes background {
     0%{background-position:50% 0%}
@@ -87,6 +106,7 @@ section {
 
 #characterImg {
     min-width: 100px;
+    padding-left: 10px;
 }
 
 .character {
@@ -108,7 +128,7 @@ section {
     height: 75px;
     /* background-color: cadetblue; */
     position: absolute;
-    top: 0px;
+    top: -85px;
     right: var(--randomNumber);
 }
 
@@ -117,7 +137,7 @@ section {
     height: 75px;
     /* background-color: cadetblue; */
     position: absolute;
-    top: 0px;
+    top: -85px;
     right: 100px;
 }
 
@@ -126,7 +146,7 @@ section {
     height: 75px;
     /* background-color: cadetblue; */
     position: absolute;
-    top: 0px;
+    top: -85px;
     right: 200px;
 }
 
@@ -135,7 +155,7 @@ section {
     height: 75px;
     /* background-color: cadetblue; */
     position: absolute;
-    top: -75px;
+    top: -85px;
     right: 300px;
 }
 
@@ -145,7 +165,7 @@ section {
     height: 75px;
     /* background-color: cadetblue; */
     position: absolute;
-    top: -75px;
+    top: -85px;
     right: 400px;
 }
 
@@ -155,16 +175,17 @@ section {
     height: 75px;
     /* background-color: cadetblue; */
     position: absolute;
-    top: -75px;
+    top: -85px;
     right: 60px;
 }
+
 
 .collider7 {
     width: 75px;
     height: 75px;
     /* background-color: cadetblue; */
     position: absolute;
-    top: -75px;
+    top: -85px;
     right: 100px;
 }
 
@@ -182,10 +203,6 @@ section {
     height: 95px;
 }
 
-#bird {
-    width: 50px;
-    height: 50px;
-}
 </style>
 <body>
 <!-- HTML Starts -->
@@ -193,7 +210,7 @@ section {
 <h1>Up up and away</h1>
 <section>
     <div class="instructions">
-        <button>Start</button>
+        <button class="start">Start</button>
     </div>
 
 
@@ -223,6 +240,27 @@ section {
 // Game object that holds all parts of the applicaiton
 const game = {};
 
+
+
+
+
+// TO DO
+
+// Pulls start button into JS
+game.start = $('.start') 
+
+
+
+
+// CREATE TOUCH SENSITIVITY TO WORK ON MOBILE
+$('.gameArea').on('touchstart', game.touchMoveChecker);
+
+
+
+
+
+
+
 // Character
 game.character = $(".character");
 
@@ -244,7 +282,6 @@ game.characterX = 0;
 
 // Sets collision to false right from the beginning
 game.collisionStatus = false;
-
 
 // Collision function
 // Checks if any side of the character intersects with any side of the collider
@@ -385,6 +422,22 @@ game.moveChecker = function(e) {
 }
 
 
+game.touchMoveChecker = function(e) {
+    let gameWidth = $(".gameArea").width() / 2;
+    console.log(gameWidth)
+    let touch = e.touches[0].clientX;
+
+        if (touch > gameWidth / 2 && game.checkLeft() === true) {
+            // works
+            console.log("left")
+        } else if (game.checkRight() === true) {
+            // doesnt work
+            console.log("right")
+        }
+};
+
+
+
 // Checks if there is no collision SPECIFICALLY with a collider, continue animating the colliders
 game.resetCollider = function() {
     if (game.collisionStatus === false) {
@@ -468,8 +521,8 @@ game.resetCollider = function() {
     }
 
 
-// If there is no collision (as checked with resetCollider()), run animation of the colliders again after 9 seconds
-game.resetAnimation = setInterval(game.resetCollider, 15000);
+// If there is no collision (as checked with resetCollider()), run animation of the colliders again
+game.resetAnimation = setInterval(game.resetCollider, 16000);
 
 
 // If there is a collision SPECIFICALLY with a collider, stop animation, game is over
@@ -501,19 +554,23 @@ game.stopGameOver = function() {
 game.init = function() {
     // Animates colliders right off the bat
     game.resetCollider()
-    // swal("Hello world!");
-
+    
     // Senses keystrokes and moves character accordingly
     $(document).on('keydown', game.moveChecker);
-    $(document).on('touch', game.moveChecker);
-    
 }   
 
 
-$(function() {
-    game.init();
-});
+// STARTS GAME INIT
+// $(function() {
+game.startGame = function() {
+    $(game.start).on('click', function() {
+        game.init();
+    })
+}
+// });
 
+// Start game
+game.startGame();
 
 </script>
 </body>
