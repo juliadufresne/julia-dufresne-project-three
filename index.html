@@ -219,8 +219,22 @@ section {
     height: 95px;
 }
 
+@media (max-width: 1074px) {
+    section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 
+    .instructions {
+        margin-bottom: 20px;
+    }
 
+    .gameArea {
+        margin-bottom: 20px;
+    }
+}
 
 </style>
 <body>
@@ -438,14 +452,16 @@ game.moveChecker = function(e) {
 game.touchMoveChecker = function(e) {
     const touchX = e.originalEvent.touches[0].pageX;
     const gameWidth = touchX - this.offsetLeft;
-
+    const characterPos = e.originalEvent.touches[0].pageX;
+    
     if (gameWidth < 250){
         let safe = game.checkLeft();
 
         if (safe === true && game.noCollision()) {
             game.characterX = game.characterX - 20;
             game.character.css("--x", game.characterX + "px");
-        } else {
+     
+    } else {
 
         }
     }
