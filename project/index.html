@@ -209,18 +209,30 @@ section {
 }
 
 @media (max-width: 1074px) {
-    /* section {
+    section {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-    } */
+    }
 
     .instructions {
+        margin-bottom: 20px;
+        border: none;
+        box-shadow: none;
+        height: 0;
+    }
+
+    .words {
         display: none;
     }
 
+    .start {
+        margin-bottom: 20px;
+    }
+
     .gameArea {
+        margin-top: 40px;
         margin-bottom: 20px;
     }
 }
@@ -245,7 +257,7 @@ section {
 <h1>Up up and away</h1>
 <section>
     <div class="instructions">
-        <div>
+        <div class="words">
             <h3>It's time to go up up and away!</h3>
             <p>You've boarded a hot air balloon to take you on the trip of a lifetime. Know where you want to go yet? Great!</p>
             <p>In order to get there safe and sound, you've got to stay clear of a few obstacles that may get in your way, such as <span>clouds</span> and <span>planes</span>.</p>
