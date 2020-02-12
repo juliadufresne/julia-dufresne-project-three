@@ -1,0 +1,190 @@
+// HEADING OF UP UP AND AWAY
+h1 {
+    font-family: 'Chewy', cursive;
+    text-align: center;
+    color: #ca728b;
+    font-size: 64px;
+    padding: 0;
+    margin: 0;
+    padding-bottom: 5px;
+}
+
+// TIMER
+.timer {
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
+}
+
+// GAME AREA CONTAINING INSTRUCTIONS AND GAME
+section {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+// GAME AREA
+.gameArea {
+    background: linear-gradient(359deg, #dbc2df, #ebcfe5, #f3d9e2, #d1dff9, #9cd1ed);
+    background-size: 800% 800%;
+    -webkit-animation: background 30s ease infinite;
+    -moz-animation: background 30s ease infinite;
+    animation: background 30s ease infinite;
+    min-width: 500px;
+    width: 25vw;
+    height: 600px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: -10px 10px 24px 0px rgba(202,114,139,0.6);
+}
+
+// GAME AREA BACKGROUND ANIMATION
+@-webkit-keyframes background {
+    0%{background-position:50% 0%}
+    50%{background-position:51% 100%}
+    100%{background-position:50% 0%}
+}
+@-moz-keyframes background {
+    0%{background-position:50% 0%}
+    50%{background-position:51% 100%}
+    100%{background-position:50% 0%}
+}
+@keyframes background {
+    0%{background-position:50% 0%}
+    50%{background-position:51% 100%}
+    100%{background-position:50% 0%}
+}
+
+// INSTRUCTIONS
+.instructions {
+    width: calc(500px - 40px);
+    height: 400px;
+    box-shadow: 10px 10px 24px 0px rgba(202,114,139,0.6);
+    border-radius: 15px;
+    margin-right: 10px;
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 18px;
+    padding: 20px;
+    background-color: white;    
+}
+
+.instructions span {
+    color: #2b7c93;
+    font-weight: bold;
+}
+
+// START BUTTON
+.start {
+    margin: 0 auto;
+    background-color: #b7d1e2;
+    font-family: 'Chewy', cursive;
+    text-transform: lowercase;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 10px;
+    font-size: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    box-shadow: 5px 5px 12px 0px rgba(202,114,139,0.6);
+}
+
+.start:active {
+    box-shadow: 2px 2px 8px 0px rgba(202,114,139,0.6);
+}
+
+// MAIN CHARACTER - HOT AIR BALLOON
+#characterImg {
+    min-width: 100px;
+    padding-left: 10px;
+}
+
+.character {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 55px;
+    height: 95px;
+    position: absolute;
+    bottom: 30px;
+    right: calc((100% / 2) - 25px);
+    transform: translateX(var(--x));
+    transition: transform 0.05s linear;
+    z-index: 1;
+}
+
+// COLLIDER/ENEMY
+
+.collider {
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    top: -85px;
+    right: var(--randomNumber);
+}
+
+.collider2 {
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    top: -85px;
+    right: 100px;
+}
+
+.collider3 {
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    top: -85px;
+    right: 200px;
+}
+
+.collider4 {
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    top: -85px;
+    right: 300px;
+}
+
+.collider5 {
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    top: -85px;
+    right: 400px;
+}
+
+.collider6 {
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    top: -85px;
+    right: 60px;
+}
+
+.collider7 {
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    top: -85px;
+    right: 100px;
+}
+
+.collider8 {
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    top: -75px;
+    right: 100px;
+}
+
+#plane {
+    width: 95px;
+    height: 95px;
+}
