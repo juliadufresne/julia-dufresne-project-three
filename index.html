@@ -9,6 +9,20 @@
     <title>Up up and away ☁️</title>
 </head>
 <style>
+/* 
+
+TO DO
+RESTRUCTURE FILE SYSTEM
+GET TIMER TO STOP ON COLLISION
+ALERT GAME OVER ON COLLISON WITH SWEET ALERTS
+INCREASE SPEED OF CHARACTER AS TIME GOES ON (EVERY 8 SECONDS MAYBE?)
+ */
+
+
+
+
+
+
 /* CSS Starts */
 :root {
     --x: 0px;
@@ -36,7 +50,13 @@ h1 {
     font-size: 64px;
     padding: 0;
     margin: 0;
-    padding-bottom: 20px;
+    padding-bottom: 5px;
+}
+
+.timer {
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
 }
 
 section {
@@ -259,8 +279,9 @@ section {
 <!-- HTML Starts -->
 
 
+    <h1>Up up and away</h1>
+    <div class="timer"><label id="minutes">00</label>:<label id="seconds">00</label></div>
 
-<h1>Up up and away</h1>
 <section>
     <div class="instructions">
         <div class="words">
@@ -297,9 +318,9 @@ section {
 // JavaScript Here
 
 
-
 // Game object that holds all parts of the applicaiton
 const game = {};
+
 
 // Pulls start button into JS
 game.start = $('.start') 
@@ -608,9 +629,31 @@ game.stopGameOver = function() {
 
 
 
+
+
 game.init = function() {
     // Animates colliders right off the bat
     game.resetCollider()
+
+    let minutes = document.getElementById("minutes");
+    let seconds = document.getElementById("seconds");
+    let totalSeconds = 0;
+
+    setInterval(setTime, 1000);
+        function setTime() {
+            ++totalSeconds;
+            seconds.innerHTML = timer(totalSeconds % 60);
+            minutes.innerHTML = timer(parseInt(totalSeconds / 60));
+        }
+
+        function timer(val) {
+            let valString = val + "";
+            if (valString.length < 2) {
+                return "0" + valString;
+            } else {
+                return valString;
+            }
+        }
     
     // Senses keystrokes and moves character accordingly
     $(document).on('keydown', game.moveChecker);
