@@ -52,6 +52,7 @@ section {
     -moz-animation: background 30s ease infinite;
     animation: background 30s ease infinite;
     min-width: 500px;
+    width: 25vw;
     height: 600px;
     position: relative;
     overflow: hidden;
@@ -130,7 +131,7 @@ section {
     height: 95px;
     position: absolute;
     bottom: 30px;
-    right: calc((500px / 2) - 25px);
+    right: calc((100% / 2) - 25px);
     transform: translateX(var(--x));
     transition: transform 0.05s linear;
     z-index: 1;
@@ -470,6 +471,8 @@ game.touchMoveChecker = function(e) {
     const touchX = e.originalEvent.touches[0].pageX;
     const gameWidth = touchX - this.offsetLeft;
     const characterPos = e.originalEvent.touches[0].pageX;
+
+
     
     if (gameWidth < 250){
         let safe = game.checkLeft();
