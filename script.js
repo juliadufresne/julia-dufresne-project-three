@@ -26,6 +26,7 @@ game.characterX = 0;
 // Sets collision to false right from the beginning
 game.collisionStatus = false;
 
+game.gameAreaWidth = $('.gameArea').width();
 
 // COLLISION FUNCTION (modified from https://gist.github.com/jaxxreal/7527349 )
 // Checks if any side of the character intersects with any side of the collider
@@ -70,7 +71,7 @@ game.checkCollision = function(enemy) {
 
 game.checkLeft = function() {
     game.characterPosition = game.character.position();
-    if (game.characterPosition.left <= 20) {
+    if (game.characterPosition.left <= 30) {
         return false;
     } else {
         return true;
@@ -87,7 +88,7 @@ game.checkLeft = function() {
 
 game.checkRight = function() {
     game.characterPosition = game.character.position();
-    if (game.characterPosition.left >= 420) {
+    if (game.characterPosition.left >= (game.gameAreaWidth - 90)) {
         return false;
     } else {
         return true;
@@ -183,7 +184,7 @@ game.touchMoveChecker = function(e) {
 game.resetCollider = function() {
     if (game.collisionStatus === false) {
         game.collider.offset({top: 0});
-        game.collider.css('left', Math.floor(Math.random() * 400))
+        game.collider.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 80)))
         game.collider.animate({
             top: "+=1200"
         },8000, "linear", function() {
@@ -192,7 +193,7 @@ game.resetCollider = function() {
         });
         
         game.collider2.offset({top: 0});
-        game.collider2.css('left', Math.floor(Math.random() * 400))
+        game.collider2.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 80)))
         game.collider2.delay(2000).animate({
             top: "+=1200"
         },8000, "linear", function() {
@@ -201,7 +202,7 @@ game.resetCollider = function() {
         });
 
         game.collider3.offset({top: 0});
-        game.collider3.css('left', Math.floor(Math.random() * 400))
+        game.collider3.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 80)))
         game.collider3.delay(4000).animate({
             top: "+=1200"
         },8000, "linear", function() {
@@ -210,7 +211,7 @@ game.resetCollider = function() {
         });
 
         game.collider4.offset({top: 0});
-        game.collider4.css('left', Math.floor(Math.random() * 400))
+        game.collider4.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 80)))
         game.collider4.delay(6000).animate({
             top: "+=1200"
         },8000, "linear", function() {
@@ -223,7 +224,7 @@ game.resetCollider = function() {
 
     function collider5() {
         game.collider5.offset({top: 0});
-        game.collider5.css('left', Math.floor(Math.random() * 400))
+        game.collider5.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 80)))
         game.collider5.animate({
             top: "+=1200"
         },8000, "linear", function() {
@@ -233,7 +234,7 @@ game.resetCollider = function() {
         
     function collider6() {
         game.collider6.offset({top: 0});
-        game.collider6.css('left', Math.floor(Math.random() * 400))
+        game.collider6.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 80)))
         game.collider6.animate({
             top: "+=1200"
         },8000, "linear", function() {
@@ -244,7 +245,7 @@ game.resetCollider = function() {
 
     function collider7() {
         game.collider7.offset({top: 0});
-        game.collider7.css('left', Math.floor(Math.random() * 400))
+        game.collider7.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 80)))
         game.collider7.animate({
             top: "+=1200"
         },8000, "linear", function() {
@@ -254,7 +255,7 @@ game.resetCollider = function() {
 
     function collider8() {
         game.collider8.offset({top: 0});
-        game.collider8.css('left', Math.floor(Math.random() * 400))
+        game.collider8.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 80)))
         game.collider8.animate({
             top: "+=1200"
         },8000, "linear", function() {
@@ -306,7 +307,6 @@ game.stopGameOver = function() {
 // Senses keystrokes and moves character accordingly
 game.init = function() {
     game.resetCollider();
-
     $(document).on('keydown', game.moveChecker);
     $(".gameArea").on('touchstart', game.touchMoveChecker);
 }

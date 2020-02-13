@@ -398,6 +398,10 @@ section {
           box-shadow: 5px 5px 12px 0px rgba(202, 114, 139, 0.6);
 }
 
+.swal-footer {
+  text-align: center;
+}
+
 .swal-button:hover {
   color: #2b7c93;
 }
@@ -448,59 +452,17 @@ section {
   right: var(--randomNumber);
 }
 
-.collider2 {
-  width: 75px;
-  height: 75px;
-  position: absolute;
-  top: -85px;
-  right: 100px;
-}
-
-.collider3 {
-  width: 75px;
-  height: 75px;
-  position: absolute;
-  top: -85px;
-  right: 200px;
-}
-
-.collider4 {
-  width: 75px;
-  height: 75px;
-  position: absolute;
-  top: -85px;
-  right: 300px;
-}
-
-.collider5 {
-  width: 75px;
-  height: 75px;
-  position: absolute;
-  top: -85px;
-  right: 400px;
-}
-
-.collider6 {
-  width: 75px;
-  height: 75px;
-  position: absolute;
-  top: -85px;
-  right: 60px;
-}
-
-.collider7 {
-  width: 75px;
-  height: 75px;
-  position: absolute;
-  top: -85px;
-  right: 100px;
-}
-
+.collider2,
+.collider3,
+.collider4,
+.collider5,
+.collider6,
+.collider7,
 .collider8 {
   width: 75px;
   height: 75px;
   position: absolute;
-  top: -75px;
+  top: -85px;
   right: 100px;
 }
 
