@@ -1,7 +1,6 @@
 // Game object that holds all parts of the applicaiton
 const game = {};
 
-
 // Pulls start button into JS
 game.start = $('.start') 
 
@@ -21,56 +20,47 @@ game.collider8 = $(".collider8");
 // Checks x and y position of character
 game.characterPosition = game.character.position();
 
-// Updates character to move (sets it to 0 initially)
+// Updates character to move (sets starting point to zero)
 game.characterX = 0;
 
 // Sets collision to false right from the beginning
 game.collisionStatus = false;
 
-// Collision function
+
+// COLLISION FUNCTION (modified from https://gist.github.com/jaxxreal/7527349 )
 // Checks if any side of the character intersects with any side of the collider
 // If they don't intersect - return false (all clear, keep playing)
 // If they do intersect - return true (collision detected, game over)
 game.checkCollision = function(enemy) {
-    var x1 = game.character.offset().left;
-    var y1 = game.character.offset().top;
-    var h1 = game.character.outerHeight(true);
-    var w1 = game.character.outerWidth(true);
-    var b1 = y1 + h1;
-    var r1 = x1 + w1;
-    var x2 = $(enemy).offset().left;
-    var y2 = $(enemy).offset().top;
-    var h2 = $(enemy).outerHeight(true);
-    var w2 = $(enemy).outerWidth(true);
-    var b2 = y2 + h2;
-    var r2 = x2 + w2;
+    let x1 = game.character.offset().left;
+    let y1 = game.character.offset().top;
+    let h1 = game.character.outerHeight(true);
+    let w1 = game.character.outerWidth(true);
+    let b1 = y1 + h1;
+    let r1 = x1 + w1;
+    let x2 = $(enemy).offset().left;
+    let y2 = $(enemy).offset().top;
+    let h2 = $(enemy).outerHeight(true);
+    let w2 = $(enemy).outerWidth(true);
+    let b2 = y2 + h2;
+    let r2 = x2 + w2;
 
     let characterAboveEnemy = b1 < y2;
     let enemyAboveCharacter = y1 > b2;
     let enemyLeftCharacterRight = r1 < x2;
     let enemyRightCharacterLeft = x1 > r2;
 
-
 // If the character and enemy are clear of eachother, keep going, collision is false
     if (enemyAboveCharacter || characterAboveEnemy || enemyLeftCharacterRight || enemyRightCharacterLeft) {
-        console.log("YOURE ALL CLEAR🍑")
-        // console.log(`EnemyAboveCharacter: ${enemyAboveCharacter}`);
-        // console.log(`CharacterAbobeEnemy: ${characterAboveEnemy}`);
-        // console.log(`enemyLeftCharacterRight: ${enemyLeftCharacterRight}`);
-        // console.log(`enemyRightCharacterLeft: ${enemyRightCharacterLeft}`);
         return false;
 
     } else {
-        console.log("COLLISION DETECTED🤖");
-        // console.log(`EnemyAboveCharacter: ${enemyAboveCharacter}`);
-        // console.log(`CharacterAbobeEnemy: ${characterAboveEnemy}`);
-        // console.log(`enemyLeftCharacterRight: ${enemyLeftCharacterRight}`);
-        // console.log(`enemyRightCharacterLeft: ${enemyRightCharacterLeft}`);
+// If the character and enemy collide, collision is true
         return true;
     }
 }
 
-
+// CHECK LEFT FUNCTION
 // Checks if it is safe to continue moving left without intersecting with a wall
 game.checkLeft = function() {
 
@@ -90,7 +80,7 @@ game.checkLeft = function() {
     }
 }
 
-
+// CHECK RIGHT FUNCTION
 // Checks if it is safe to continue moving right without intersecting with a wall
 game.checkRight = function() {
 
@@ -120,7 +110,7 @@ game.anyCollision = function() {
     return game.checkCollision(game.collider) === true || game.checkCollision(game.collider2) === true || game.checkCollision(game.collider3) === true || game.checkCollision(game.collider4) === true || game.checkCollision(game.collider5) === true || game.checkCollision(game.collider6) === true || game.checkCollision(game.collider7) === true || game.checkCollision(game.collider8) === true
 }
 
-
+// ANIMATES AND MOVES CHARACTERS WITH KEYBOARD
 // Checks if its safe to move character (that it's not intersecting with wall or collider)
 // Calls checkLeft(), checkRight() and checkCollision()
 game.moveChecker = function(e) {
@@ -166,14 +156,10 @@ game.moveChecker = function(e) {
 }
 
 
-// What side is touching
-// Move in that direction
+// ANIMATES AND MOVES CHARACTERS WITH TOUCHSCREEN
 game.touchMoveChecker = function(e) {
     const touchX = e.originalEvent.touches[0].pageX;
     const gameWidth = touchX - this.offsetLeft;
-    const characterPos = e.originalEvent.touches[0].pageX;
-
-
     
     if (gameWidth < 250){
         let safe = game.checkLeft();
@@ -181,9 +167,9 @@ game.touchMoveChecker = function(e) {
         if (safe === true && game.noCollision()) {
             game.characterX = game.characterX - 20;
             game.character.css("--x", game.characterX + "px");
-     
-    } else {
 
+        } else {
+            // DO NOTHING
         }
     }
 
@@ -193,12 +179,15 @@ game.touchMoveChecker = function(e) {
         if (safe === true && game.noCollision()){
             game.characterX = game.characterX + 20;
             game.character.css("--x", game.characterX + "px");
+
+        } else {
+            // DO NOTHING
         }
-    }
+    } 
 };
 
 
-
+// IF THERE IS NO COLLISION, CONTINUE ANIMATING COLLIDERS EVER EIGHT SECONDS
 // Checks if there is no collision SPECIFICALLY with a collider, continue animating the colliders
 game.resetCollider = function() {
     if (game.collisionStatus === false) {
@@ -282,6 +271,10 @@ game.resetCollider = function() {
     }
 
 
+    
+
+
+// GAME OVER FUNCTION
 // If there is a collision SPECIFICALLY with a collider, stop animation, game is over
 game.over = setInterval(function() {
 
@@ -301,53 +294,31 @@ game.over = setInterval(function() {
     }
 }, 200);
 
-
+// STOP INTERVAL ON GAME OVER
 // If game is over, clear interval
 game.stopGameOver = function() {
     clearInterval(game.over)
 }
 
 
-
-
-
+// CALL ALL NECESSARY FUNCTIONS TO MAKE GAME WORK IN INIT
 game.init = function() {
     // Animates colliders right off the bat
-    game.resetCollider()
+    game.resetCollider();
 
-    let minutes = document.getElementById("minutes");
-    let seconds = document.getElementById("seconds");
-    let totalSeconds = 0;
-
-    setInterval(setTime, 1000);
-        function setTime() {
-            ++totalSeconds;
-            seconds.innerHTML = timer(totalSeconds % 60);
-            minutes.innerHTML = timer(parseInt(totalSeconds / 60));
-        }
-
-        function timer(val) {
-            let valString = val + "";
-            if (valString.length < 2) {
-                return "0" + valString;
-            } else {
-                return valString;
-            }
-        }
-    
     // Senses keystrokes and moves character accordingly
     $(document).on('keydown', game.moveChecker);
     $(".gameArea").on('touchstart', game.touchMoveChecker);
 }
 
-// STARTS GAME INIT
-// $(function() {
+// CALLS ALL 
 game.startGame = function() {
     $(game.start).on('click', function() {
         game.init();
         // If there is no collision (as checked with resetCollider()), run animation of the colliders again
         game.resetAnimation = setInterval(game.resetCollider, 16000);
-    })
+        $(this).prop('disabled', true);
+    });
 }
 
 // Start game

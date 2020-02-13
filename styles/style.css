@@ -247,7 +247,7 @@ h1 {
   font-size: 64px;
   padding: 0;
   margin: 0;
-  padding-bottom: 5px;
+  padding-bottom: 20px;
 }
 
 .timer {
@@ -453,4 +453,52 @@ section {
 #plane {
   width: 95px;
   height: 95px;
+}
+
+@media (max-width: 1074px) {
+  section {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .instructions {
+    margin-bottom: 20px;
+    border: none;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    height: 0;
+  }
+  .words {
+    display: none;
+  }
+  .start {
+    margin-bottom: 20px;
+  }
+  .gameArea {
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 580px) {
+  h1 {
+    font-size: 45px;
+  }
+  .instructions {
+    min-width: 80vw;
+    width: 320px;
+  }
+  .gameArea {
+    min-width: 80vw;
+  }
 }
