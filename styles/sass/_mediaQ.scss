@@ -11,6 +11,7 @@
         margin: 0;
         border: none;
         box-shadow: none;
+        background-color: transparent;
         height: 0;
     }
 
@@ -28,6 +29,15 @@
         margin-bottom: 20px;
     }
 }
+
+@media (max-width: 918px) {
+
+    .background1,
+    .background2 {
+        display: none;
+    }
+}
+
 
 @media (max-width: 580px) {
 

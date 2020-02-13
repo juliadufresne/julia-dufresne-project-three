@@ -4,6 +4,31 @@
     margin: 0 auto;
 }
 
+body {
+    background-color: #fffafa;
+}
+
+main {
+    height: 100vh;
+    position: relative;
+}
+
+.background1 {
+    z-index: -1;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    opacity: 30%;
+}
+
+.background2 {
+    z-index: -1;
+    position: absolute;
+    top: 10px;
+    right: 0;
+    opacity: 30%;
+}
+
 // HEADING OF UP UP AND AWAY
 h1 {
     font-family: 'Chewy', cursive;
@@ -141,7 +166,7 @@ section {
     justify-content: center;
     align-items: center;
     width: 55px;
-    height: 95px;
+    height: 100px;
     position: absolute;
     bottom: 30px;
     right: calc((100% / 2) - 25px);

@@ -60,99 +60,90 @@ game.checkCollision = function(enemy) {
     }
 }
 
+
 // CHECK LEFT FUNCTION
 // Checks if it is safe to continue moving left without intersecting with a wall
-game.checkLeft = function() {
-
     // On every keydown that goes left, the first thing that happens is updating the characters position
-    game.characterPosition = game.character.position();
-
     // If the updated position is less than or equal to where the left wall starts
-    if (game.characterPosition.left <= 20) {
-
-        // State that check left is false AKA cannot move anymore
-        return false;
-
+    // State that check left is false AKA cannot move anymore
     // Otherwise, keep moving
-    } else {
 
+game.checkLeft = function() {
+    game.characterPosition = game.character.position();
+    if (game.characterPosition.left <= 20) {
+        return false;
+    } else {
         return true;
     }
 }
+
 
 // CHECK RIGHT FUNCTION
 // Checks if it is safe to continue moving right without intersecting with a wall
-game.checkRight = function() {
-
-    // On every keydown that goes left, the first thing that happens is updating the characters position
-    game.characterPosition = game.character.position();
-
+    // On every keydown that goes right, the first thing that happens is updating the characters position
     // If the updated position is less than or equal to where the right wall starts
-    if (game.characterPosition.left >= 420) {
-
-        // State that check left is false AKA cannot move anymore
-        return false;
-
+    // State that check left is false AKA cannot move anymore
     // Otherwise, keep moving
-    } else {
 
+game.checkRight = function() {
+    game.characterPosition = game.character.position();
+    if (game.characterPosition.left >= 420) {
+        return false;
+    } else {
         return true;
     }
 }
+
 
 // No collision is happening on any colliders
 game.noCollision = function() {
     return game.checkCollision(game.collider) === false && game.checkCollision(game.collider2) === false && game.checkCollision(game.collider3) === false && game.checkCollision(game.collider4) === false && game.checkCollision(game.collider5) === false && game.checkCollision(game.collider6) === false && game.checkCollision(game.collider7) === false && game.checkCollision(game.collider8) === false
 }
 
+
 // A collision is happening on any colliders
 game.anyCollision = function() {
     return game.checkCollision(game.collider) === true || game.checkCollision(game.collider2) === true || game.checkCollision(game.collider3) === true || game.checkCollision(game.collider4) === true || game.checkCollision(game.collider5) === true || game.checkCollision(game.collider6) === true || game.checkCollision(game.collider7) === true || game.checkCollision(game.collider8) === true
 }
 
+
 // ANIMATES AND MOVES CHARACTERS WITH KEYBOARD
 // Checks if its safe to move character (that it's not intersecting with wall or collider)
 // Calls checkLeft(), checkRight() and checkCollision()
+    // If the left key is clicked
+    // The return value is stored in "safe" AKA if the character is hitting the wall it's false, if the character is not hitting the wall its true
+    // It is not hitting the wall AND check if the character is intersecting with the collider
+    // Continue to move right
+    // If it is hitting the wall
+    // Do nothing
+    // If the right key is clicked
+    // The return value is stored in "safe" AKA if the character is hitting the wall it's false, if the character is not hitting the wall its true
+    // It is not hitting the wall AND check if the character is intersecting with the collider
+    // Continue to move right
+    // If it is hitting the wall or a collider
+    // Do nothing
+
 game.moveChecker = function(e) {
-
-        // If the left key is clicked
         if (e.which === 37) { 
-
-        // The return value is stored in "safe" AKA if the character is hitting the wall it's false, if the character is not hitting the wall its true
         let safe = game.checkLeft();
 
-        // It is not hitting the wall AND check if the character is intersecting with the collider
-        if(safe === true && game.noCollision()) {
+            if(safe === true && game.noCollision()) {
+                game.characterX = game.characterX - 20;
+                game.character.css("--x", game.characterX + "px");
+            } else {
 
-            // Continue to move right
-            game.characterX = game.characterX - 20;
-            game.character.css("--x", game.characterX + "px");
-
-        // If it is hitting the wall
-        } else {
-            
-            // Do nothing
-        }
-
-        // If the right key is clicked
+            }
         } else if (e.which === 39) {
-
-        // The return value is stored in "safe" AKA if the character is hitting the wall it's false, if the character is not hitting the wall its true
         let safe = game.checkRight();
 
-        // It is not hitting the wall AND check if the character is intersecting with the collider
-        if(safe === true && game.noCollision()) {
+            if(safe === true && game.noCollision()) {
 
-            // Continue to move right
-            game.characterX = game.characterX + 20;
-            game.character.css("--x", game.characterX + "px")
-            
-        // If it is hitting the wall or a collider
-        } else {
-            
-            // Do nothing
+                game.characterX = game.characterX + 20;
+                game.character.css("--x", game.characterX + "px")
+            } else {
+                
+            }
         }
-    }
 }
 
 
@@ -229,6 +220,7 @@ game.resetCollider = function() {
     }
 }
 
+
     function collider5() {
         game.collider5.offset({top: 0});
         game.collider5.css('left', Math.floor(Math.random() * 400))
@@ -271,11 +263,10 @@ game.resetCollider = function() {
     }
 
 
-    
-
-
 // GAME OVER FUNCTION
 // If there is a collision SPECIFICALLY with a collider, stop animation, game is over
+    // Use SweetAlert.js to notify game over, and give option to play again
+    // If play again is clicked, reload page which refreshes start button to play again
 game.over = setInterval(function() {
 
     if (game.collisionStatus === false) {
@@ -290,16 +281,17 @@ game.over = setInterval(function() {
             game.collider7.animate().stop();
             game.collider8.animate().stop();
             game.stopGameOver();
-            swal({
+                swal({
                 title: "Game over!",
                 text: "Although your hot air balloon got lost in the sky, keep followin' your dreams!",
                 button: "Play again  ☁️",
-              }).then(() => {
+            }).then(() => {
                 window.location.reload();
-              });
+            });
         }
     }
 }, 200);
+
 
 // STOP INTERVAL ON GAME OVER
 // If game is over, clear interval
@@ -309,26 +301,30 @@ game.stopGameOver = function() {
 
 
 // CALL ALL NECESSARY FUNCTIONS TO MAKE GAME WORK IN INIT
+// Animates colliders right off the bat
+// Senses keystrokes and moves character accordingly
 game.init = function() {
-    // Animates colliders right off the bat
     game.resetCollider();
 
-    // Senses keystrokes and moves character accordingly
     $(document).on('keydown', game.moveChecker);
     $(".gameArea").on('touchstart', game.touchMoveChecker);
 }
 
-// CALLS ALL 
+
+// CALLS INIT 
+// On click of start button, call animation function and sense if keys or touch is happening
+// Disable start button
+// If there is no collision (as checked with resetCollider()), run animation of the colliders again
 game.startGame = function() {
     $(game.start).on('click', function() {
         game.init();
-        // If there is no collision (as checked with resetCollider()), run animation of the colliders again
-        game.resetAnimation = setInterval(game.resetCollider, 16000);
         $(this).prop('disabled', true);
+        game.resetAnimation = setInterval(game.resetCollider, 16000);
     });
 }
 
-// Start game
+// START GAME
+// Start game in document ready
 $(function() {
     game.startGame();
 });

@@ -9,34 +9,39 @@
     <link rel="stylesheet" href="./styles/style.css">
     <title>Up up and away ☁️</title>
 </head>
-<h1>Up up and away</h1>
+<main>
 
-<section class="wrapper">
-    <div class="instructions">
-        <div class="words">
-            <h3>It's time to go up up and away!</h3>
-            <p>You've boarded a hot air balloon to take you on the trip of a lifetime. Know where you want to go yet? Great!</p>
-            <p>In order to get there safe and sound, you've got to stay clear of a few obstacles that may get in your way, such as <span>clouds</span> and <span>planes</span>.</p>
-            <p>When you'ready to take off, click <span>start</span>. <br> You're in for a long journey - buckle up!</p>
+    <h1>Up up and away</h1>
+
+    <section class="wrapper">
+        <div class="instructions">
+            <div class="words">
+                <h3>It's time to go up up and away!</h3>
+                <p>You've boarded a hot air balloon to take you on the trip of a lifetime. Know where you want to go yet? Great!</p>
+                <p>In order to get there safe and sound, you've got to stay clear of a few obstacles that may get in your way, such as <span>clouds</span> and <span>planes</span>.</p>
+                <p>When you'ready to take off, click <span>start</span>. <br> You're in for a long journey - buckle up!</p>
+            </div>
+            <button class="start">Start</button>
         </div>
-        <button class="start">Start</button>
-    </div>
-
-
-    <div class="gameArea" id="gameAreaBackground">
-        <div class="character">
-            <img src="./assets/hot-air-balloon.svg" alt="Hot air balloon" id="characterImg">
+    
+    
+        <div class="gameArea" id="gameAreaBackground">
+            <div class="character">
+                <img src="./assets/hot-air-balloon.svg" alt="Hot air balloon" id="characterImg">
+            </div>
+            <img src="./assets/cloudy.svg" alt="Clouds" class="collider">
+            <img src="./assets/clouds.svg" alt="Clouds" class="collider2">
+            <img src="./assets/cloudy.svg" alt="Clouds" class="collider3">
+            <img src="./assets/airplane.svg" alt="Airplane" class="collider4" id="plane">
+            <img src="./assets/cloudy.svg" alt="Clouds" class="collider5">
+            <img src="./assets/cloudy.svg" alt="Clouds" class="collider6">
+            <img src="./assets/clouds.svg" alt="Clouds" class="collider7">
+            <img src="./assets/cloudy.svg" alt="Clouds" class="collider8">
         </div>
-        <img src="./assets/cloudy.svg" alt="Clouds" class="collider">
-        <img src="./assets/clouds.svg" alt="Clouds" class="collider2">
-        <img src="./assets/cloudy.svg" alt="Clouds" class="collider3">
-        <img src="./assets/airplane.svg" alt="Airplane" class="collider4" id="plane">
-        <img src="./assets/cloudy.svg" alt="Clouds" class="collider5">
-        <img src="./assets/cloudy.svg" alt="Clouds" class="collider6">
-        <img src="./assets/clouds.svg" alt="Clouds" class="collider7">
-        <img src="./assets/cloudy.svg" alt="Clouds" class="collider8">
-    </div>
-</section>
+    </section>
+    <img src="./assets/background.png" alt="" class="background1">
+    <img src="./assets/background2.png" alt="" class="background2">
+</main>
 <script src='https://code.jquery.com/jquery-3.4.0.min.js' integrity='sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=' crossorigin='anonymous'></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="script.js"></script>
