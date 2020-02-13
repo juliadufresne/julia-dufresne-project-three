@@ -283,8 +283,9 @@ game.over = setInterval(function() {
             game.stopGameOver();
                 swal({
                 title: "Game over!",
-                text: "Although your hot air balloon got lost in the sky, keep followin' your dreams!",
+                text: "Your hot air balloon got lost in the sky",
                 button: "Play again  ☁️",
+                closeOnClickOutside: false,
             }).then(() => {
                 window.location.reload();
             });

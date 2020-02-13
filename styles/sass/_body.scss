@@ -4,10 +4,6 @@
     margin: 0 auto;
 }
 
-body {
-    background-color: #fffafa;
-}
-
 main {
     height: 100vh;
     position: relative;
@@ -35,7 +31,7 @@ h1 {
     text-align: center;
     color: #ca728b;
     font-size: 64px;
-
+    text-shadow: 5px 5px #def2fa;
     margin: 0;
     padding: 20px;
 }
