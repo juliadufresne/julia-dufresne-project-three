@@ -240,14 +240,19 @@ html {
   --randomNumber: 0px;
 }
 
+.wrapper {
+  max-width: 1200px;
+  width: 90%;
+  margin: 0 auto;
+}
+
 h1 {
   font-family: 'Chewy', cursive;
   text-align: center;
   color: #ca728b;
   font-size: 64px;
-  padding: 0;
   margin: 0;
-  padding-bottom: 20px;
+  padding: 20px;
 }
 
 .timer {
@@ -261,9 +266,9 @@ section {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .gameArea {
@@ -329,6 +334,7 @@ section {
           align-items: flex-end;
   font-size: 18px;
   padding: 20px;
+  margin-right: 40px;
   background-color: white;
 }
 
@@ -346,7 +352,7 @@ section {
   padding: 10px 30px;
   border-radius: 10px;
   font-size: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   cursor: pointer;
   -webkit-box-shadow: 5px 5px 12px 0px rgba(202, 114, 139, 0.6);
           box-shadow: 5px 5px 12px 0px rgba(202, 114, 139, 0.6);
@@ -355,6 +361,32 @@ section {
 .start:active {
   -webkit-box-shadow: 2px 2px 8px 0px rgba(202, 114, 139, 0.6);
           box-shadow: 2px 2px 8px 0px rgba(202, 114, 139, 0.6);
+}
+
+.swal-button {
+  margin: 0 auto;
+  background-color: #ca728b;
+  font-family: 'Nunito', sans-serif;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  -webkit-box-shadow: 5px 5px 12px 0px rgba(202, 114, 139, 0.6);
+          box-shadow: 5px 5px 12px 0px rgba(202, 114, 139, 0.6);
+}
+
+.swal-button:hover {
+  color: #2b7c93;
+}
+
+.swal-text {
+  font-family: 'Nunito', sans-serif;
+  text-align: center;
+}
+
+.swal-title {
+  font-family: 'Nunito', sans-serif;
 }
 
 #characterImg {
@@ -472,7 +504,7 @@ section {
             align-items: center;
   }
   .instructions {
-    margin-bottom: 20px;
+    margin: 0;
     border: none;
     -webkit-box-shadow: none;
             box-shadow: none;

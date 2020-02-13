@@ -1,12 +1,18 @@
+.wrapper {
+    max-width: 1200px;
+    width: 90%;
+    margin: 0 auto;
+}
+
 // HEADING OF UP UP AND AWAY
 h1 {
     font-family: 'Chewy', cursive;
     text-align: center;
     color: #ca728b;
     font-size: 64px;
-    padding: 0;
+
     margin: 0;
-    padding-bottom: 20px;
+    padding: 20px;
 }
 
 // TIMER
@@ -20,7 +26,7 @@ h1 {
 section {
     width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
 // GAME AREA
@@ -71,6 +77,7 @@ section {
     align-items: flex-end;
     font-size: 18px;
     padding: 20px;
+    margin-right:40px;
     background-color: white;    
 }
 
@@ -89,7 +96,7 @@ section {
     padding: 10px 30px;
     border-radius: 10px;
     font-size: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     cursor: pointer;
     box-shadow: 5px 5px 12px 0px rgba(202,114,139,0.6);
 }
@@ -97,6 +104,31 @@ section {
 .start:active {
     box-shadow: 2px 2px 8px 0px rgba(202,114,139,0.6);
 }
+
+.swal-button {
+    margin: 0 auto;
+    background-color: #ca728b;
+    font-family: 'Nunito', sans-serif;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 5px 5px 12px 0px rgba(202,114,139,0.6);
+  }
+
+  .swal-button:hover {
+    color: #2b7c93;
+  }
+
+  .swal-text {
+    font-family: 'Nunito', sans-serif;
+    text-align: center;
+  }
+
+  .swal-title {
+    font-family: 'Nunito', sans-serif;
+  }
 
 // MAIN CHARACTER - HOT AIR BALLOON
 #characterImg {

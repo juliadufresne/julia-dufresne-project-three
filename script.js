@@ -290,6 +290,13 @@ game.over = setInterval(function() {
             game.collider7.animate().stop();
             game.collider8.animate().stop();
             game.stopGameOver();
+            swal({
+                title: "Game over!",
+                text: "Although your hot air balloon got lost in the sky, keep followin' your dreams!",
+                button: "Play again  ☁️",
+              }).then(() => {
+                window.location.reload();
+              });
         }
     }
 }, 200);
