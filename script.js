@@ -1,32 +1,9 @@
-// Game object that holds all parts of the applicaiton
+// Namespacing
 const game = {};
 
-// Pulls start button into JS
+// Start button
 game.start = $('.start') 
 
-// Character
-game.character = $(".character");
-
-// Colliders
-game.collider = $(".collider");
-game.collider2 = $(".collider2");
-game.collider3 = $(".collider3");
-game.collider4 = $(".collider4");
-game.collider5 = $(".collider5");
-game.collider6 = $(".collider6");
-game.collider7 = $(".collider7");
-game.collider8 = $(".collider8");
-
-// Checks x and y position of character
-game.characterPosition = game.character.position();
-
-// Updates character to move (sets starting point to zero)
-game.characterX = 0;
-
-// Sets collision to false right from the beginning
-game.collisionStatus = false;
-
-game.gameAreaWidth = $('.gameArea').width();
 
 // COLLISION FUNCTION (modified from https://gist.github.com/jaxxreal/7527349 )
 // Checks if any side of the character intersects with any side of the collider
@@ -64,11 +41,10 @@ game.checkCollision = function(enemy) {
 
 // CHECK LEFT FUNCTION
 // Checks if it is safe to continue moving left without intersecting with a wall
-    // On every keydown that goes left, the first thing that happens is updating the characters position
-    // If the updated position is less than or equal to where the left wall starts
-    // State that check left is false AKA cannot move anymore
-    // Otherwise, keep moving
-
+// On every keydown that goes left, the first thing that happens is updating the characters position
+// If the updated position is less than or equal to where the left wall starts
+// State that check left is false AKA cannot move anymore
+// Otherwise, keep moving
 game.checkLeft = function() {
     game.characterPosition = game.character.position();
     if (game.characterPosition.left <= 30) {
@@ -81,11 +57,10 @@ game.checkLeft = function() {
 
 // CHECK RIGHT FUNCTION
 // Checks if it is safe to continue moving right without intersecting with a wall
-    // On every keydown that goes right, the first thing that happens is updating the characters position
-    // If the updated position is less than or equal to where the right wall starts
-    // State that check left is false AKA cannot move anymore
-    // Otherwise, keep moving
-
+// On every keydown that goes right, the first thing that happens is updating the characters position
+// If the updated position is less than or equal to where the right wall starts
+// State that check left is false AKA cannot move anymore
+// Otherwise, keep moving
 game.checkRight = function() {
     game.characterPosition = game.character.position();
     if (game.characterPosition.left >= (game.gameAreaWidth - 90)) {
@@ -110,20 +85,20 @@ game.anyCollision = function() {
 
 // ANIMATES AND MOVES CHARACTERS WITH KEYBOARD
 // Checks if its safe to move character (that it's not intersecting with wall or collider)
-// Calls checkLeft(), checkRight() and checkCollision()
-    // If the left key is clicked
-    // The return value is stored in "safe" AKA if the character is hitting the wall it's false, if the character is not hitting the wall its true
-    // It is not hitting the wall AND check if the character is intersecting with the collider
-    // Continue to move right
-    // If it is hitting the wall
-    // Do nothing
-    // If the right key is clicked
-    // The return value is stored in "safe" AKA if the character is hitting the wall it's false, if the character is not hitting the wall its true
-    // It is not hitting the wall AND check if the character is intersecting with the collider
-    // Continue to move right
-    // If it is hitting the wall or a collider
-    // Do nothing
+// Calls checkLeft(), checkRight(), checkCollision(), noCollision(), anyCollision()
+// If the left key is clicked:
+// The return value is stored in "safe" AKA if the character is hitting the wall it's false, if the character is not hitting the wall its true
+// It is not hitting the wall AND check if the character is intersecting with the collider
+// Continue to move right
+// If it is hitting the wall
+// Do nothing
 
+// If the right key is clicked:
+// The return value is stored in "safe" AKA if the character is hitting the wall it's false, if the character is not hitting the wall its true
+// It is not hitting the wall AND check if the character is intersecting with the collider
+// Continue to move right
+// If it is hitting the wall or a collider
+// Do nothing
 game.moveChecker = function(e) {
         if (e.which === 37) { 
         let safe = game.checkLeft();
@@ -184,7 +159,7 @@ game.touchMoveChecker = function(e) {
 game.resetCollider = function() {
     if (game.collisionStatus === false) {
         game.collider.offset({top: 0});
-        game.collider.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 80)))
+        game.collider.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 85)))
         game.collider.animate({
             top: "+=1200"
         },8000, "linear", function() {
@@ -193,7 +168,7 @@ game.resetCollider = function() {
         });
         
         game.collider2.offset({top: 0});
-        game.collider2.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 80)))
+        game.collider2.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 85)))
         game.collider2.delay(2000).animate({
             top: "+=1200"
         },8000, "linear", function() {
@@ -202,7 +177,7 @@ game.resetCollider = function() {
         });
 
         game.collider3.offset({top: 0});
-        game.collider3.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 80)))
+        game.collider3.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 85)))
         game.collider3.delay(4000).animate({
             top: "+=1200"
         },8000, "linear", function() {
@@ -211,7 +186,7 @@ game.resetCollider = function() {
         });
 
         game.collider4.offset({top: 0});
-        game.collider4.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 80)))
+        game.collider4.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 85)))
         game.collider4.delay(6000).animate({
             top: "+=1200"
         },8000, "linear", function() {
@@ -221,20 +196,19 @@ game.resetCollider = function() {
     }
 }
 
-
     function collider5() {
         game.collider5.offset({top: 0});
-        game.collider5.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 80)))
+        game.collider5.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 85)))
         game.collider5.animate({
             top: "+=1200"
         },8000, "linear", function() {
             // Animation complete.
         });
     }
-        
+
     function collider6() {
         game.collider6.offset({top: 0});
-        game.collider6.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 80)))
+        game.collider6.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 85)))
         game.collider6.animate({
             top: "+=1200"
         },8000, "linear", function() {
@@ -242,10 +216,9 @@ game.resetCollider = function() {
         });
     }
 
-
     function collider7() {
         game.collider7.offset({top: 0});
-        game.collider7.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 80)))
+        game.collider7.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 85)))
         game.collider7.animate({
             top: "+=1200"
         },8000, "linear", function() {
@@ -255,7 +228,7 @@ game.resetCollider = function() {
 
     function collider8() {
         game.collider8.offset({top: 0});
-        game.collider8.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 80)))
+        game.collider8.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 85)))
         game.collider8.animate({
             top: "+=1200"
         },8000, "linear", function() {
@@ -266,8 +239,8 @@ game.resetCollider = function() {
 
 // GAME OVER FUNCTION
 // If there is a collision SPECIFICALLY with a collider, stop animation, game is over
-    // Use SweetAlert.js to notify game over, and give option to play again
-    // If play again is clicked, reload page which refreshes start button to play again
+// Use SweetAlert.js to notify game over, and give option to play again
+// If play again is clicked, reload page which refreshes start button to play again
 game.over = setInterval(function() {
 
     if (game.collisionStatus === false) {
@@ -302,13 +275,48 @@ game.stopGameOver = function() {
 }
 
 
-// CALL ALL NECESSARY FUNCTIONS TO MAKE GAME WORK IN INIT
+// CALL ALL NECESSARY FUNCTIONS AND EVENT LISTENERS TO MAKE GAME WORK IN INIT
 // Animates colliders right off the bat
 // Senses keystrokes and moves character accordingly
 game.init = function() {
-    game.resetCollider();
+
+    // Character
+    game.character = $(".character");
+
+    // Colliders
+    game.collider = $(".collider");
+    game.collider2 = $(".collider2");
+    game.collider3 = $(".collider3");
+    game.collider4 = $(".collider4");
+    game.collider5 = $(".collider5");
+    game.collider6 = $(".collider6");
+    game.collider7 = $(".collider7");
+    game.collider8 = $(".collider8");
+
+    // Checks x and y position of character
+    game.characterPosition = game.character.position();
+
+    // Updates character to move (sets starting point to zero)
+    game.characterX = 0;
+
+    // Sets collision to false right from the beginning
+    game.collisionStatus = false;
+
+    // Checks width of game area based on screen size
+    game.gameAreaWidth = $('.gameArea').width();
+
+    // Initiate keydown character to move
     $(document).on('keydown', game.moveChecker);
+
+    // Initiate on touch character to move
     $(".gameArea").on('touchstart', game.touchMoveChecker);
+
+    // Reset collider animation
+    game.resetCollider();
+
+    // Set interval for collider animations
+    game.resetAnimation = setInterval(game.resetCollider, 16000);
+    
 }
 
 
@@ -320,9 +328,9 @@ game.startGame = function() {
     $(game.start).on('click', function() {
         game.init();
         $(this).prop('disabled', true);
-        game.resetAnimation = setInterval(game.resetCollider, 16000);
     });
 }
+
 
 // START GAME
 // Start game in document ready
