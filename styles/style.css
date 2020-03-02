@@ -494,8 +494,12 @@ section {
     min-width: 80vw;
     width: 320px;
   }
+}
+
+@media (max-width: 600px) {
   .gameArea {
     min-width: 80vw;
+    height: 550px;
   }
   .background1,
   .background2 {
