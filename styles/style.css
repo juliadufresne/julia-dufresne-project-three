@@ -248,7 +248,7 @@ html {
 
 header {
   height: 100vh;
-  background: #d1dff9;
+  background: #8dd7e9;
   background-size: cover;
   position: relative;
 }
@@ -265,7 +265,7 @@ main {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  background: #d1dff9;
+  background: #8dd7e9;
 }
 
 .background1 {
@@ -316,10 +316,10 @@ section {
 
 .gameArea {
   margin: 50px auto;
-  background: linear-gradient(359deg, #dbc2df, #ebcfe5, #f3d9e2, #d1dff9, #9cd1ed);
+  background: linear-gradient(359deg, #dbc2df, #ebcfe5, #f3d9e2, #8dd7e9, #8dd7e9);
   border-radius: 50px;
-  -webkit-box-shadow: 20px 20px 60px #b2bed4,  -20px -20px 60px #ffffff;
-          box-shadow: 20px 20px 60px #b2bed4,  -20px -20px 60px #ffffff;
+  -webkit-box-shadow: 20px 20px 60px #78b7c6, -20px -20px 60px #a2f7ff;
+          box-shadow: 20px 20px 60px #78b7c6, -20px -20px 60px #a2f7ff;
   background-size: 800% 800%;
   -webkit-animation: background 30s ease infinite;
   animation: background 30s ease infinite;
@@ -363,9 +363,9 @@ section {
   margin: 0 auto;
   margin-top: 60px;
   border-radius: 50px;
-  background: #d1dff9;
-  -webkit-box-shadow: 20px 20px 60px #b2bed4,  -20px -20px 60px #ffffff;
-          box-shadow: 20px 20px 60px #b2bed4,  -20px -20px 60px #ffffff;
+  background: #8dd7e9;
+  -webkit-box-shadow: 20px 20px 60px #78b7c6, -20px -20px 60px #a2f7ff;
+          box-shadow: 20px 20px 60px #78b7c6, -20px -20px 60px #a2f7ff;
 }
 
 .instructions span {
