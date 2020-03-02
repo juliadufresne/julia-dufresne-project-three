@@ -6,14 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Chewy&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Spartan&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="./styles/style.css">
     <title>Up up and away ☁️</title>
 </head>
-<main>
-
-    <h1>Up up and away</h1>
-
+<header>
     <section class="wrapper">
+        <h1>Up up and away</h1>
         <div class="instructions">
             <div class="words">
                 <h3>It's time to go up up and away!</h3>
@@ -21,10 +20,14 @@
                 <p>In order to get there safe and sound, you've got to stay clear of a few obstacles that may get in your way, such as <span>clouds</span> and <span>planes</span>.</p>
                 <p>When you'ready to take off, click <span>start</span>. <br> You're in for a long journey - buckle up!</p>
             </div>
-            <button class="start">Start</button>
+                <button class="start">Start</button>
         </div>
-
-
+    </section>
+    <img src="./assets/white.png" alt="" class="background1">
+    <img src="./assets/white3.png" alt="" class="background2">
+</header>
+<main>
+    <section class="wrapper">
         <div class="gameArea" id="gameAreaBackground">
             <div class="character">
                 <img src="./assets/hot-air-balloon.svg" alt="Hot air balloon" id="characterImg">
@@ -39,12 +42,7 @@
             <img src="./assets/cloudy.svg" alt="Clouds" class="collider8">
         </div>
     </section>
-    <img src="./assets/background.png" alt="" class="background1">
-    <img src="./assets/background2.png" alt="" class="background2">
-
-    <footer>
-        <a rel="stylesheet" href="http://www.sharon-yi.com/">Inspired by Sharon Yi</a>
-    </footer>
+        <p class="sharon">Inspired by Sharon Yi</p>
 </main>
 <script src='https://code.jquery.com/jquery-3.4.0.min.js' integrity='sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=' crossorigin='anonymous'></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

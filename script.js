@@ -161,7 +161,7 @@ game.resetCollider = function() {
         game.collider.offset({top: 0});
         game.collider.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 85)))
         game.collider.animate({
-            top: "+=1200"
+            top: "+=1400"
         },8000, "linear", function() {
             // Animation complete.
             collider5();
@@ -170,7 +170,7 @@ game.resetCollider = function() {
         game.collider2.offset({top: 0});
         game.collider2.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 85)))
         game.collider2.delay(2000).animate({
-            top: "+=1200"
+            top: "+=1400"
         },8000, "linear", function() {
             // Animation complete.
             collider6();
@@ -179,7 +179,7 @@ game.resetCollider = function() {
         game.collider3.offset({top: 0});
         game.collider3.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 85)))
         game.collider3.delay(4000).animate({
-            top: "+=1200"
+            top: "+=1400"
         },8000, "linear", function() {
             // Animation complete.
             collider7();
@@ -188,7 +188,7 @@ game.resetCollider = function() {
         game.collider4.offset({top: 0});
         game.collider4.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 85)))
         game.collider4.delay(6000).animate({
-            top: "+=1200"
+            top: "+=1400"
         },8000, "linear", function() {
             // Animation complete.
             collider8();
@@ -200,7 +200,7 @@ game.resetCollider = function() {
         game.collider5.offset({top: 0});
         game.collider5.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 85)))
         game.collider5.animate({
-            top: "+=1200"
+            top: "+=1400"
         },8000, "linear", function() {
             // Animation complete.
         });
@@ -210,7 +210,7 @@ game.resetCollider = function() {
         game.collider6.offset({top: 0});
         game.collider6.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 85)))
         game.collider6.animate({
-            top: "+=1200"
+            top: "+=1400"
         },8000, "linear", function() {
             // Animation complete.
         });
@@ -220,7 +220,7 @@ game.resetCollider = function() {
         game.collider7.offset({top: 0});
         game.collider7.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 85)))
         game.collider7.animate({
-            top: "+=1200"
+            top: "+=1400"
         },8000, "linear", function() {
             // Animation complete.
         })
@@ -230,7 +230,7 @@ game.resetCollider = function() {
         game.collider8.offset({top: 0});
         game.collider8.css('left', Math.floor(Math.random() * (game.gameAreaWidth - 85)))
         game.collider8.animate({
-            top: "+=1200"
+            top: "+=1400"
         },8000, "linear", function() {
             // Animation complete.
         })
@@ -328,6 +328,9 @@ game.startGame = function() {
     $(game.start).on('click', function() {
         game.init();
         $(this).prop('disabled', true);
+        $('html, body').animate({
+            scrollTop: $("main").offset().top
+        }, 2000);
     });
 }
 

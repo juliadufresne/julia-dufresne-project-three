@@ -246,21 +246,36 @@ html {
   margin: 0 auto;
 }
 
-main {
+header {
   height: 100vh;
+  background: #d1dff9;
+  background-size: cover;
   position: relative;
 }
 
+main {
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background: #d1dff9;
+}
+
 .background1 {
-  z-index: -1;
   position: absolute;
-  bottom: 10px;
+  bottom: 0;
   left: 0;
   opacity: 30%;
 }
 
 .background2 {
-  z-index: -1;
   position: absolute;
   top: 10px;
   right: 0;
@@ -270,11 +285,13 @@ main {
 h1 {
   font-family: 'Chewy', cursive;
   text-align: center;
-  color: #ca728b;
-  font-size: 64px;
+  color: white;
+  font-size: calc(40px + (100 - 40) * ((100vw - 320px) / (1400 - 320)));
   text-shadow: 5px 5px #def2fa;
   margin: 0;
   padding: 20px;
+  margin-top: 20px;
+  z-index: 10;
 }
 
 .timer {
@@ -288,13 +305,21 @@ section {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
 }
 
 .gameArea {
+  margin: 50px auto;
   background: linear-gradient(359deg, #dbc2df, #ebcfe5, #f3d9e2, #d1dff9, #9cd1ed);
+  border-radius: 50px;
+  -webkit-box-shadow: 20px 20px 60px #b2bed4,  -20px -20px 60px #ffffff;
+          box-shadow: 20px 20px 60px #b2bed4,  -20px -20px 60px #ffffff;
   background-size: 800% 800%;
   -webkit-animation: background 30s ease infinite;
   animation: background 30s ease infinite;
@@ -303,9 +328,6 @@ section {
   height: 600px;
   position: relative;
   overflow: hidden;
-  border-radius: 15px;
-  -webkit-box-shadow: -10px 10px 24px 0px rgba(202, 114, 139, 0.6);
-          box-shadow: -10px 10px 24px 0px rgba(202, 114, 139, 0.6);
 }
 
 @-webkit-keyframes background {
@@ -333,31 +355,17 @@ section {
 }
 
 .instructions {
-  width: calc(500px - 40px);
-  height: 400px;
-  -webkit-box-shadow: 10px 10px 24px 0px rgba(202, 114, 139, 0.6);
-          box-shadow: 10px 10px 24px 0px rgba(202, 114, 139, 0.6);
-  border-radius: 15px;
-  margin-right: 10px;
-  text-align: center;
-  font-family: 'Nunito', sans-serif;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
+  z-index: 10;
+  width: 50%;
+  font-family: 'Spartan', sans-serif;
   font-size: 18px;
-  padding: 20px;
-  margin-right: 40px;
-  background-color: white;
+  padding: 20px 40px;
+  margin: 0 auto;
+  margin-top: 60px;
+  border-radius: 50px;
+  background: #d1dff9;
+  -webkit-box-shadow: 20px 20px 60px #b2bed4,  -20px -20px 60px #ffffff;
+          box-shadow: 20px 20px 60px #b2bed4,  -20px -20px 60px #ffffff;
 }
 
 .instructions span {
@@ -366,8 +374,8 @@ section {
 }
 
 .start {
-  margin: 0 auto;
-  background-color: #b7d1e2;
+  width: 100px;
+  background-color: white;
   font-family: 'Chewy', cursive;
   text-transform: lowercase;
   border: none;
@@ -376,8 +384,8 @@ section {
   font-size: 20px;
   margin-bottom: 10px;
   cursor: pointer;
-  -webkit-box-shadow: 5px 5px 12px 0px rgba(202, 114, 139, 0.6);
-          box-shadow: 5px 5px 12px 0px rgba(202, 114, 139, 0.6);
+  -webkit-box-shadow: 2px 2px 12px 0px #9cd1ed;
+          box-shadow: 2px 2px 12px 0px #9cd1ed;
 }
 
 .start:active {
@@ -448,7 +456,7 @@ section {
   width: 75px;
   height: 75px;
   position: absolute;
-  top: -85px;
+  top: -75px;
   right: var(--randomNumber);
 }
 
@@ -471,72 +479,26 @@ section {
   height: 95px;
 }
 
-footer {
+.sharon {
   width: 100%;
   font-family: 'Nunito', sans-serif;
   text-align: left;
   padding: 0;
   margin: 0;
-}
-
-footer a {
-  color: black;
-  padding-left: 20px;
-  text-decoration: none;
-}
-
-@media (max-width: 1074px) {
-  section {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-  }
-  .instructions {
-    margin: 0;
-    border: none;
-    -webkit-box-shadow: none;
-            box-shadow: none;
-    background-color: transparent;
-    height: 0;
-  }
-  .words {
-    display: none;
-  }
-  .start {
-    margin-bottom: 20px;
-  }
-  .gameArea {
-    margin-top: 40px;
-    margin-bottom: 20px;
-  }
+  padding-left: 10px;
+  padding-bottom: 10px;
 }
 
 @media (max-width: 918px) {
-  .background1,
-  .background2 {
-    display: none;
-  }
-}
-
-@media (max-width: 580px) {
-  h1 {
-    font-size: 45px;
-  }
   .instructions {
     min-width: 80vw;
     width: 320px;
   }
   .gameArea {
     min-width: 80vw;
+  }
+  .background1,
+  .background2 {
+    display: none;
   }
 }
