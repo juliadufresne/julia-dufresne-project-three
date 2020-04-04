@@ -1,3 +1,8 @@
+// TO DO
+// Study function - requestAnimationFrame() - utilise this for moving the character
+// Allow game to be played with mouse, opposed to just key and touch
+// Figure out a better way to animate the colliders, instead of using position and hard-coded time
+
 // Namespacing
 const game = {};
 
@@ -5,7 +10,7 @@ const game = {};
 game.start = $('.start')
 
 
-// COLLISION FUNCTION (modified from https://gist.github.com/jaxxreal/7527349 )
+// COLLISION FUNCTION (adapted from https://gist.github.com/jaxxreal/7527349 )
 // Checks if any side of the character intersects with any side of the collider
 // If they don't intersect - return false (all clear, keep playing)
 // If they do intersect - return true (collision detected, game over)
@@ -86,19 +91,13 @@ game.anyCollision = function () {
 // ANIMATES AND MOVES CHARACTERS WITH KEYBOARD
 // Checks if its safe to move character (that it's not intersecting with wall or collider)
 // Calls checkLeft(), checkRight(), checkCollision(), noCollision(), anyCollision()
-// If the left key is clicked:
+// If the ___ key is clicked:
 // The return value is stored in "safe" AKA if the character is hitting the wall it's false, if the character is not hitting the wall its true
 // It is not hitting the wall AND check if the character is intersecting with the collider
 // Continue to move right
 // If it is hitting the wall
 // Do nothing
 
-// If the right key is clicked:
-// The return value is stored in "safe" AKA if the character is hitting the wall it's false, if the character is not hitting the wall its true
-// It is not hitting the wall AND check if the character is intersecting with the collider
-// Continue to move right
-// If it is hitting the wall or a collider
-// Do nothing
 game.moveChecker = function (e) {
     if (e.which === 37) {
         let safe = game.checkLeft();
@@ -154,7 +153,7 @@ game.touchMoveChecker = function (e) {
 };
 
 
-// IF THERE IS NO COLLISION, CONTINUE ANIMATING COLLIDERS EVER EIGHT SECONDS
+// IF THERE IS NO COLLISION, CONTINUE ANIMATING COLLIDERS EVERY EIGHT SECONDS
 // Checks if there is no collision SPECIFICALLY with a collider, continue animating the colliders
 game.resetCollider = function () {
     if (game.collisionStatus === false) {
