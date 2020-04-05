@@ -3,7 +3,8 @@
 // Allow game to be played with mouse, opposed to just key and touch
 // Figure out a better way to animate the colliders, instead of using position and hard-coded time
 
-// Namespacing
+
+// Namespacing object to organize app into
 const game = {};
 
 // Start button
